@@ -9,8 +9,10 @@ export async function POST(req: Request) {
     console.log("SePay Webhook Received:", body);
 
     // 2. Security: Verify SePay API Key
-    const sepayApiKey = req.headers.get("x-api-key");
-    if (process.env.SEPAY_API_KEY && sepayApiKey !== process.env.SEPAY_API_KEY) {
+    const authHeader = req.headers.get("Authorization");
+    const expectedKey = `Apikey ${process.env.SEPAY_API_KEY}`;
+
+    if (process.env.SEPAY_API_KEY && authHeader !== expectedKey) {
       return NextResponse.json(
         { success: false, message: "Unauthorized" },
         { status: 401 }
