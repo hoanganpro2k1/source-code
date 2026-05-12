@@ -26,7 +26,7 @@ export default function CheckoutPage() {
     accountName: "BUI HOANG AN",
     accountNumber: "100876668851",
     amount: "2,000",
-    description: "CODE789", // Order ID placeholder
+    description: "SEVQR CODE789", // Mandatory prefix for VietinBank
   };
 
   const handleCopy = (text: string, label: string) => {
