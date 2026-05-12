@@ -9,6 +9,7 @@ import {
   RotateCcw,
   Send,
   ShieldCheck,
+  ShoppingCart,
   Zap,
 } from "lucide-react";
 import { useState } from "react";
@@ -89,12 +90,21 @@ export const ProductSidebar = () => {
           </p>
         </div>
 
-        <Button
-          size="lg"
-          className="h-14 rounded-2xl gap-2 text-base font-bold w-full bg-primary mt-2"
-        >
-          <MessageCircle className="h-5 w-5" /> Liên hệ mua ngay
-        </Button>
+        <div className="flex flex-col gap-3 mt-2">
+          <Button
+            size="lg"
+            variant="outline"
+            className="h-14 rounded-2xl gap-2 text-base font-bold w-full border-primary text-primary hover:bg-primary/5"
+          >
+            <ShoppingCart className="h-5 w-5" /> Thêm vào giỏ hàng
+          </Button>
+          <Button
+            size="lg"
+            className="h-14 rounded-2xl gap-2 text-base font-bold w-full bg-primary"
+          >
+            <MessageCircle className="h-5 w-5" /> Liên hệ mua ngay
+          </Button>
+        </div>
 
         {/* Support channels */}
         <div className="grid grid-cols-3 gap-2">

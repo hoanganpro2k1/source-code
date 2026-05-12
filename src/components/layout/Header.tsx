@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { cn } from "@/lib/utils";
-import { Search } from "lucide-react";
+import { Search, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -21,7 +21,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
-      <div className="container mx-auto flex h-[72px] items-center justify-between px-6">
+      <div className="container mx-auto flex h-[72px] items-center justify-between px-4 sm:px-6 lg:px-16">
         <div className="flex items-center gap-12">
           <Link href="/" className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
@@ -43,7 +43,7 @@ export function Header() {
                     "text-sm font-medium transition-all duration-300 relative py-1",
                     isActive
                       ? "text-primary after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:rounded-full"
-                      : "text-foreground/70 hover:text-foreground"
+                      : "text-foreground/70 hover:text-foreground",
                   )}
                 >
                   {link.name}
@@ -71,6 +71,14 @@ export function Header() {
             </Button>
           </Link>
           <Button>Liên hệ</Button>
+          <Link href="/cart" className="relative group">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background transition-all group-hover:border-primary group-hover:bg-primary/5">
+              <ShoppingCart className="h-5 w-5 text-foreground/70 group-hover:text-primary" />
+            </div>
+            <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white shadow-lg shadow-primary/20">
+              3
+            </span>
+          </Link>
           <ThemeToggle />
         </div>
       </div>

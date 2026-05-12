@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function SourceDetailPage() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-8">
         {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-xs text-muted-foreground mb-8">
           <Link href="/" className="hover:text-primary transition-colors">Trang chủ</Link>

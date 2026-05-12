@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Eye, Heart, Star } from "lucide-react";
+import { Eye, Heart, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -51,10 +51,15 @@ export const ProjectCard = ({
           </span>
         </div>
 
-        {/* Favorite Button */}
-        <button className="absolute right-6 top-6 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/20 backdrop-blur-md transition-colors hover:bg-black/40">
-          <Heart className="h-4 w-4 text-white" />
-        </button>
+        {/* Action Buttons */}
+        <div className="absolute right-6 top-6 z-10 flex flex-col gap-2">
+          <button className="flex h-8 w-8 items-center justify-center rounded-full bg-black/20 backdrop-blur-md transition-colors hover:bg-black/40 text-white">
+            <Heart className="h-4 w-4" />
+          </button>
+          <button className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 backdrop-blur-md transition-all hover:bg-primary text-white border border-primary/20">
+            <ShoppingCart className="h-4 w-4" />
+          </button>
+        </div>
 
         {/* Image Wrapper */}
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[20px]">
