@@ -20,12 +20,14 @@ export async function POST(req: Request) {
     }
 
     // 3. Process the payment logic
-    const orderId = body.description; // The "CD789" from the QR content
+    const orderId = body.description;
     const amount = body.amount_in;
+
+    console.log(`Processing Webhook: orderId='${orderId}', amount=${amount}`);
 
     // Mark as paid in the store
     payments[orderId] = true;
-    console.log(`Order ${orderId} marked as PAID via Webhook.`);
+    console.log(`Order '${orderId}' marked as PAID in store. Current store:`, payments);
 
     // 4. Return 200 to SePay
     return NextResponse.json({ success: true }, { status: 200 });
