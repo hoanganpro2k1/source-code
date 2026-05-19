@@ -1,21 +1,20 @@
 import { NextResponse } from "next/server";
-import { payments } from "@/lib/payment-store";
+import prisma from "@/lib/prisma";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const orderId = searchParams.get("orderId");
 
-  console.log("Checking status for orderId:", orderId);
-  console.log("Current payments store:", payments);
-
   if (!orderId) {
     return NextResponse.json({ success: false, message: "Missing orderId" }, { status: 400 });
   }
 
-  const isPaid = !!payments[orderId];
+  const transaction = await prisma.transaction.findUnique({
+    where: { order_id: orderId }
+  });
 
   return NextResponse.json({ 
     success: true, 
-    paid: isPaid 
+    paid: transaction?.status === "PAID" 
   });
 }

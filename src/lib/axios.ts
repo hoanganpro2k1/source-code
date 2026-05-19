@@ -2,10 +2,7 @@ import { useAuthStore } from "@/store";
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 const getBaseURL = () => {
-  if (typeof window !== "undefined") {
-    return "/api";
-  }
-  return process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
+  return process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 };
 
 // Tạo axios instance riêng cho API call
@@ -117,7 +114,7 @@ apiClient.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        // Gọi lên backend để lấy Token mới dựa vào Refresh Token Cookie
+        // Gọi lên Next.js API Route để lấy Token mới dựa vào Refresh Token Cookie
         const { data } = await axios.post(
           "/api/auth/refresh",
           {},

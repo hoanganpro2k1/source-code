@@ -3,41 +3,23 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Chrome, Eye, EyeOff, Github } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { LoginSchema, type LoginBodyType } from "@/schemas/auth.schema";
-
+import { useLoginForm } from "@/hooks/use-login-form";
 
 export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
+  const { form, isLoading, onSubmit } = useLoginForm();
+  
   const {
     register,
-    handleSubmit,
     formState: { errors },
-  } = useForm<LoginBodyType>({
-    resolver: zodResolver(LoginSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-
-  const onSubmit = async (data: LoginBodyType) => {
-    setIsLoading(true);
-    // Simulate API call
-    console.log("Login data:", data);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsLoading(false);
-  };
+  } = form;
 
   return (
     <div className="flex flex-col gap-6">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <form onSubmit={onSubmit} className="space-y-5">
         <div className="space-y-2">
           <Label htmlFor="email">Email hoặc Tên đăng nhập</Label>
           <Input

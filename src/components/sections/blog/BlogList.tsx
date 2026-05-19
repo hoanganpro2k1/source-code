@@ -58,7 +58,7 @@ const BLOG_POSTS = [
     title: "Deploy website lên VPS với Docker — Hướng dẫn từ A đến Z",
     excerpt: "Hướng dẫn chi tiết cách deploy ứng dụng web lên VPS sử dụng Docker và Docker Compose, bao...",
     category: "Hướng dẫn",
-    image: "https://images.unsplash.com/photo-1605745341112-85968b193ef5?q=80&w=1000&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1000&auto=format&fit=crop",
     date: "23/3/2026",
     views: "518",
     author: "Hoàng Ân"
@@ -68,7 +68,7 @@ const BLOG_POSTS = [
     title: "Git & GitHub — Quản lý source code hiệu quả cho developer",
     excerpt: "Hướng dẫn sử dụng Git và GitHub từ cơ bản đến nâng cao: branching, merging, pull request, và qu...",
     category: "Hướng dẫn",
-    image: "https://images.unsplash.com/photo-1556075798-4825dfabb163?q=80&w=1000&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1000&auto=format&fit=crop",
     date: "23/3/2026",
     views: "332",
     author: "Hoàng Ân"

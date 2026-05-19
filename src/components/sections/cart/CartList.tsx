@@ -42,6 +42,7 @@ export const CartList = () => {
                   src={item.image}
                   alt={item.title}
                   fill
+                  sizes="80px"
                   className="object-cover"
                 />
               </div>

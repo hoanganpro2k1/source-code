@@ -40,7 +40,7 @@ const PROJECTS = [
     title: "Đồ Án Website Quản Lý Sinh Viên | ReactJS - NodeJS - MongoDB",
     price: "299.000đ",
     image:
-      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop",
     tags: ["ReactJS", "NodeJS", "MongoDB"],
     isPaid: true,
   },

@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -17,13 +18,19 @@ export const metadata: Metadata = {
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { AuthProvider } from "@/providers/auth-provider";
 import QueryProvider from "@/providers/query-provider";
+import { Toaster } from "sonner";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Đọc accessToken từ cookie (chỉ chạy trên Server)
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
   return (
     <html
       lang="vi"
@@ -41,9 +48,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <QueryProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
+            <AuthProvider initialAccessToken={accessToken}>
+              <Header initialAccessToken={accessToken} />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <Toaster richColors closeButton position="top-right" />
+            </AuthProvider>
           </QueryProvider>
         </ThemeProvider>
       </body>

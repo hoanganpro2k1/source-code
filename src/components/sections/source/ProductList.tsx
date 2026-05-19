@@ -49,7 +49,7 @@ const PRODUCTS = [
     id: 5,
     title: "Web Quản Lý Sinh Viên",
     price: "500,000đ",
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1000&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop",
     tags: ["Next.js", "Node.js", "MySQL"],
     views: "1.1k",
     rating: "4.8"
@@ -67,7 +67,7 @@ const PRODUCTS = [
     id: 7,
     title: "AI Chatbot Web",
     price: "300,000đ",
-    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd05a?q=80&w=1000&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop",
     tags: ["Next.js", "Python", "TensorFlow"],
     views: "700",
     rating: "4.9"

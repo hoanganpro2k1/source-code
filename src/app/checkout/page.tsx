@@ -121,6 +121,7 @@ export default function CheckoutPage() {
                 src={qrUrl}
                 alt="Payment QR"
                 fill
+                sizes="280px"
                 className="object-contain p-2"
               />
             </div>
