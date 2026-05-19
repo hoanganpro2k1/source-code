@@ -74,6 +74,14 @@ Always prioritize:
 
 ---
 
+# State Management & Data Fetching (CRITICAL)
+
+- ALWAYS use `@tanstack/react-query` for API calls, data fetching, and mutations (`useQuery`, `useMutation`).
+- NEVER use manual `useState` or `useEffect` for handling API loading states, errors, or fetching.
+- ALWAYS extract logic into separate custom hooks (e.g., `use-login-form.ts`, `use-register-form.ts`). Keep UI components clean and focused purely on rendering.
+
+---
+
 # UI Direction
 
 The UI style is:

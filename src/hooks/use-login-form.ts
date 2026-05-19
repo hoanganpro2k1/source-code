@@ -7,22 +7,8 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-// Giải mã JWT Token không cần thư viện ngoài
-const decodeToken = (token: string) => {
-  try {
-    const base64Url = token.split(".")[1];
-    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split("")
-        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-        .join("")
-    );
-    return JSON.parse(jsonPayload);
-  } catch (error) {
-    return null;
-  }
-};
+import { decodeJwt } from "@/lib/jwt";
+import { parseApiError } from "@/lib/api-error";
 
 export const useLoginForm = () => {
   const router = useRouter();
@@ -44,7 +30,7 @@ export const useLoginForm = () => {
       }
 
       // Giải mã token để lấy vai trò (role) và ID
-      const decoded = decodeToken(accessToken);
+      const decoded = decodeJwt<{ userId: number; email: string; roleName: string }>(accessToken);
       const user = decoded
         ? {
             id: String(decoded.userId),
@@ -67,22 +53,8 @@ export const useLoginForm = () => {
       
       router.refresh();
     },
-    onError: (error: any) => {
-      // Phân tích chi tiết cấu trúc phản hồi lỗi từ NestJS validation
-      const responseData = error.response?.data;
-      let message = "Sai thông tin đăng nhập hoặc lỗi kết nối hệ thống.";
-
-      if (responseData) {
-        if (typeof responseData.message === "string") {
-          message = responseData.message;
-        } else if (Array.isArray(responseData.message)) {
-          message = responseData.message.map((err: any) => err.message || err).join(", ");
-        } else if (Array.isArray(responseData)) {
-          message = responseData.map((err: any) => err.message || err.error).join(", ");
-        }
-      }
-
-      toast.error(message);
+    onError: (error: unknown) => {
+      toast.error(parseApiError(error, "Sai thông tin đăng nhập hoặc lỗi kết nối hệ thống."));
     },
   });
 
