@@ -1,9 +1,29 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
+
 export async function POST() {
+  const cookieStore = await cookies();
+  const refreshToken = cookieStore.get("refreshToken")?.value;
+
+  // Gọi backend logout nếu có refreshToken
+  if (refreshToken) {
+    try {
+      await fetch(`${BACKEND_URL}/auth/logout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ refreshToken }),
+      });
+    } catch (err) {
+      // Bỏ qua lỗi network — vẫn xóa cookie phía client
+      console.error("[logout] Lỗi gọi backend:", err);
+    }
+  }
+
+  // Xóa cookies phía BFF dù backend có lỗi hay không
   const response = NextResponse.json({ success: true, message: "Logged out" });
-  
-  // Xóa refreshToken cookie bằng cách set maxAge = 0
+
   response.cookies.set({
     name: "refreshToken",
     value: "",
@@ -14,7 +34,6 @@ export async function POST() {
     path: "/",
   });
 
-  // Xóa accessToken cookie
   response.cookies.set({
     name: "accessToken",
     value: "",

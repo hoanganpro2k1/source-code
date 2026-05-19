@@ -1,5 +1,16 @@
 "use client";
 
+import {
+  Bell,
+  LogOut,
+  Package,
+  Search,
+  ShoppingCart,
+  User,
+} from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,36 +21,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { useLogout } from "@/hooks/use-logout";
+import { decodeJwt } from "@/lib/jwt";
 import { cn } from "@/lib/utils";
-import { authService } from "@/services/auth.service";
 import { useAuthStore } from "@/store";
-import {
-  Bell,
-  LogOut,
-  Package,
-  Search,
-  ShoppingCart,
-  User,
-} from "lucide-react";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
 
-// Decode JWT payload đơn giản (không cần thư viện)
-function decodeJwt(token: string) {
-  try {
-    const base64Url = token.split(".")[1];
-    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split("")
-        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-        .join(""),
-    );
-    return JSON.parse(jsonPayload);
-  } catch {
-    return null;
-  }
+// Shape của JWT payload từ backend
+interface JwtPayload {
+  userId: string | number;
+  email?: string;
+  name?: string;
+  roleName?: string;
 }
+
 
 export function Header({
   initialAccessToken,
@@ -47,12 +41,8 @@ export function Header({
   initialAccessToken?: string;
 }) {
   const pathname = usePathname();
-  const router = useRouter();
-  const {
-    accessToken: storeToken,
-    user: storeUser,
-    clearAuth,
-  } = useAuthStore();
+  const { accessToken: storeToken, user: storeUser } = useAuthStore();
+  const { logout: handleLogout, isLoggingOut } = useLogout();
 
   // Ưu tiên dùng storeToken nếu đã có (sau khi login), còn không dùng initialAccessToken từ server
   const accessToken = storeToken || initialAccessToken;
@@ -62,29 +52,16 @@ export function Header({
     storeUser ||
     (() => {
       if (!initialAccessToken) return null;
-      const decoded = decodeJwt(initialAccessToken);
+      const decoded = decodeJwt<JwtPayload>(initialAccessToken);
       if (!decoded) return null;
       return {
         id: String(decoded.userId),
-        username: decoded.email || "",
+        username: decoded.email ?? "",
         name: decoded.name,
         role: decoded.roleName,
-        avatar: undefined,
+        avatar: undefined as string | undefined,
       };
     })();
-
-  // Xử lý đăng xuất tài khoản
-  const handleLogout = async () => {
-    try {
-      await authService.logout();
-    } catch (err) {
-      console.error("Lỗi đăng xuất:", err);
-    } finally {
-      clearAuth();
-      router.push("/");
-      router.refresh();
-    }
-  };
 
   // Trích xuất ký tự đầu tiên của tên để hiển thị Avatar mặc định
   const getInitials = (name?: string) => {
@@ -240,10 +217,13 @@ export function Header({
                     <Button
                       variant="ghost"
                       onClick={handleLogout}
-                      className="w-full justify-start gap-3 px-3 py-2.5 h-auto rounded-[14px] text-sm font-medium text-destructive hover:bg-destructive/10 hover:text-destructive transition-all duration-200"
+                      disabled={isLoggingOut}
+                      className="w-full justify-start gap-3 px-3 py-2.5 h-auto rounded-[14px] text-sm font-medium text-destructive hover:bg-destructive/10 hover:text-destructive transition-all duration-200 disabled:opacity-60"
                     >
                       <LogOut className="h-4 w-4" />
-                      <span>Đăng xuất</span>
+                      <span>
+                        {isLoggingOut ? "Đang đăng xuất..." : "Đăng xuất"}
+                      </span>
                     </Button>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -251,10 +231,17 @@ export function Header({
             </>
           ) : (
             <>
-              <Button variant="ghost" asChild className="hidden sm:inline-flex text-foreground/70 hover:text-foreground">
+              <Button
+                variant="ghost"
+                asChild
+                className="hidden sm:inline-flex text-foreground/70 hover:text-foreground"
+              >
                 <Link href="/login">Đăng nhập</Link>
               </Button>
-              <Button asChild className="hidden sm:inline-flex bg-primary hover:bg-primary/90 text-white rounded-[14px] px-5">
+              <Button
+                asChild
+                className="hidden sm:inline-flex bg-primary hover:bg-primary/90 text-white rounded-[14px] px-5"
+              >
                 <Link href="/contact">Liên hệ</Link>
               </Button>
               <Button
