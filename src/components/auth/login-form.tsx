@@ -1,79 +1,75 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Chrome, Eye, EyeOff, Github } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
-import { useLoginForm } from "@/hooks/use-login-form";
+import { Button } from '@/components/ui/button';
+import { GoogleIcon } from '@/components/ui/icons';
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from '@/components/ui/input-group';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
+import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useLoginForm } from '@/hooks/use-login-form';
 
 export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { form, isLoading, onSubmit, handleGoogleLogin, isGoogleLoading } = useLoginForm();
-  
+
   const {
     register,
     formState: { errors },
   } = form;
 
   return (
-    <div className="flex flex-col gap-6">
-      <form onSubmit={onSubmit} className="space-y-5">
-        <div className="space-y-2">
-          <Label htmlFor="email">Email hoặc Tên đăng nhập</Label>
-          <Input
-            id="email"
-            placeholder="name@example.com"
-            className="h-12 rounded-xl bg-white/5 px-4 focus-visible:ring-primary/30"
-            {...register("email")}
-          />
-          {errors.email && (
-            <p className="text-xs text-red-500">{errors.email.message}</p>
-          )}
+    <div className="flex flex-col gap-1">
+      <form onSubmit={onSubmit} className="space-y-4">
+        {/* Email */}
+        <div className="space-y-1">
+          <InputGroup className="h-12 rounded-xl bg-white/5">
+            <InputGroupAddon>
+              <Mail />
+            </InputGroupAddon>
+            <InputGroupInput id="email" type="email" placeholder="Email" {...register('email')} />
+          </InputGroup>
+          <div className="min-h-[18px]">
+            {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
+          </div>
         </div>
 
-        <div className="space-y-2">
+        {/* Mật khẩu */}
+        <div className="space-y-1">
+          <InputGroup className="h-12 rounded-xl bg-white/5">
+            <InputGroupAddon>
+              <Lock />
+            </InputGroupAddon>
+            <InputGroupInput
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Mật khẩu"
+              {...register('password')}
+            />
+            <InputGroupAddon align="inline-end">
+              <InputGroupButton onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+              </InputGroupButton>
+            </InputGroupAddon>
+          </InputGroup>
+          <div className="min-h-[18px]">
+            {errors.password && <p className="text-xs text-red-500">{errors.password.message}</p>}
+          </div>
           <div className="flex items-center justify-between">
-            <Label htmlFor="password">Mật khẩu</Label>
-            <Link
-              href="/forgot-password"
-              className="text-xs text-primary hover:underline"
-            >
+            <Link href="/forgot-password" className="text-xs text-primary hover:underline">
               Quên mật khẩu?
             </Link>
           </div>
-          <div className="relative">
-            <Input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              placeholder="••••••••"
-              className="h-12 rounded-[12px] bg-white/5 px-4 pr-11 focus-visible:ring-primary/30"
-              {...register("password")}
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
-          </div>
-          {errors.password && (
-            <p className="text-xs text-red-500">{errors.password.message}</p>
-          )}
         </div>
 
-        <div className="flex items-center space-x-2">
-          <input
-            type="checkbox"
+        {/* Ghi nhớ */}
+        <div className="flex items-center gap-3">
+          <Checkbox
             id="remember"
-            className="h-4 w-4 rounded border-white/10 bg-white/5 text-primary focus:ring-primary/30"
+            className="rounded-sm border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-white"
           />
-          <Label
-            htmlFor="remember"
-            className="text-sm font-normal cursor-pointer"
-          >
+          <Label htmlFor="remember" className="text-sm text-muted-foreground font-normal cursor-pointer">
             Ghi nhớ đăng nhập
           </Label>
         </div>
@@ -89,54 +85,35 @@ export const LoginForm = () => {
               Đang xử lý...
             </div>
           ) : (
-            "Đăng nhập"
+            'Đăng nhập'
           )}
         </Button>
       </form>
 
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t border-white/10" />
-        </div>
+      <div className="relative my-3">
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-card px-2 text-muted-foreground">
-            Hoặc đăng nhập với
-          </span>
+          <span className="px-2 font-semibold text-muted-foreground">Hoặc đăng nhập với</span>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <Button
-          variant="outline"
-          className="h-12 gap-2 text-foreground/80 hover:bg-foreground/5 relative overflow-hidden"
-          type="button"
-          onClick={handleGoogleLogin}
-          disabled={isLoading || isGoogleLoading}
-        >
-          {isGoogleLoading ? (
-            <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary/30 border-t-primary" />
-          ) : (
-            <Chrome size={18} />
-          )}
-          <span>Google</span>
-        </Button>
-        <Button
-          variant="outline"
-          className="h-12 gap-2 text-foreground/80 hover:bg-foreground/5"
-          type="button"
-          disabled={isLoading || isGoogleLoading}
-        >
-          <Github size={18} />
-          Github
-        </Button>
-      </div>
+      <Button
+        variant="outline"
+        className="h-12 gap-2 text-foreground/80 hover:bg-foreground/5 relative overflow-hidden border border-input hover:border-input"
+        type="button"
+        onClick={handleGoogleLogin}
+        disabled={isLoading || isGoogleLoading}
+      >
+        {isGoogleLoading ? (
+          <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary/30 border-t-primary" />
+        ) : (
+          <GoogleIcon width={20} height={20} style={{ display: 'block' }} />
+        )}
+        <span className="text-base">Google</span>
+      </Button>
 
-      <p className="text-center text-sm text-muted-foreground">
-        Chưa có tài khoản?{" "}
-        <Link
-          href="/register"
-          className="font-semibold text-primary hover:underline"
-        >
+      <p className="text-center text-sm text-muted-foreground mt-1">
+        Chưa có tài khoản?{' '}
+        <Link href="/register" className="font-semibold text-primary hover:underline">
           Đăng ký ngay
         </Link>
       </p>

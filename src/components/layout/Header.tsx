@@ -1,30 +1,24 @@
-"use client";
+'use client';
 
-import {
-  Bell,
-  LogOut,
-  Package,
-  Search,
-  ShoppingCart,
-  User,
-} from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Bell, LogOut, Package, Search, ShoppingCart, User } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { useLogout } from "@/hooks/use-logout";
-import { decodeJwt } from "@/lib/jwt";
-import { cn } from "@/lib/utils";
-import { useAuthStore } from "@/store";
+} from '@/components/ui/dropdown-menu';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { useLogout } from '@/hooks/use-logout';
+import { decodeJwt } from '@/lib/jwt';
+import { cn } from '@/lib/utils';
+import { useAuthStore } from '@/store';
 
 // Shape của JWT payload từ backend
 interface JwtPayload {
@@ -34,12 +28,7 @@ interface JwtPayload {
   roleName?: string;
 }
 
-
-export function Header({
-  initialAccessToken,
-}: {
-  initialAccessToken?: string;
-}) {
+export function Header({ initialAccessToken }: { initialAccessToken?: string }) {
   const pathname = usePathname();
   const { accessToken: storeToken, user: storeUser } = useAuthStore();
   const { logout: handleLogout, isLoggingOut } = useLogout();
@@ -56,7 +45,7 @@ export function Header({
       if (!decoded) return null;
       return {
         id: String(decoded.userId),
-        username: decoded.email ?? "",
+        username: decoded.email ?? '',
         name: decoded.name,
         role: decoded.roleName,
         avatar: undefined as string | undefined,
@@ -65,17 +54,14 @@ export function Header({
 
   // Trích xuất ký tự đầu tiên của tên để hiển thị Avatar mặc định
   const getInitials = (name?: string) => {
-    if (!name) return "U";
+    if (!name) return 'U';
     return name.trim().charAt(0).toUpperCase();
   };
 
   const navLinks = [
-    { name: "Trang chủ", href: "/" },
-    { name: "Source Code", href: "/source" },
-    { name: "Danh mục", href: "#" },
-    { name: "Blog", href: "/blog" },
-    { name: "Dịch vụ", href: "#" },
-    { name: "Hỗ trợ", href: "#" },
+    { name: 'Trang chủ', href: '/' },
+    { name: 'Sản phẩm', href: '/source' },
+    { name: 'Blog', href: '/blog' },
   ];
 
   return (
@@ -83,11 +69,16 @@ export function Header({
       <div className="container mx-auto flex h-[72px] items-center justify-between px-4 sm:px-6 lg:px-16">
         <div className="flex items-center gap-12">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <span className="text-sm font-bold text-white">SC</span>
-            </div>
-            <span className="text-xl font-bold tracking-tight text-foreground">
-              Source Code
+            <Image
+              src="/logo.jpg"
+              alt="Source Code Logo"
+              width={36}
+              height={36}
+              className="rounded-lg object-contain"
+              priority
+            />
+            <span className="text-xl font-black tracking-tight text-foreground">
+              <span className="text-[#04315B]">ĐỒ ÁN</span> <span className="text-[#FF6A00]">24h</span>
             </span>
           </Link>
 
@@ -99,10 +90,10 @@ export function Header({
                   key={link.name}
                   href={link.href}
                   className={cn(
-                    "text-sm font-medium transition-all duration-300 relative py-1",
+                    'text-sm font-medium transition-all duration-300 relative py-1',
                     isActive
-                      ? "text-primary after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:rounded-full"
-                      : "text-foreground/70 hover:text-foreground",
+                      ? 'text-primary after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:rounded-full'
+                      : 'text-foreground/70 hover:text-foreground',
                   )}
                 >
                   {link.name}
@@ -162,12 +153,10 @@ export function Header({
                     className="h-10 w-10 rounded-full p-0 hover:scale-105 active:scale-95 transition-all duration-300 hover:ring-2 hover:ring-primary/30"
                   >
                     <Avatar className="h-10 w-10 border border-border">
-                      {user.avatar && (
-                        <AvatarImage src={user.avatar} alt="Avatar" />
-                      )}
+                      {user.avatar && <AvatarImage src={user.avatar} alt="Avatar" />}
                       <AvatarFallback
                         className="font-bold text-base"
-                        style={{ backgroundColor: "#7C4DFF", color: "#fff" }}
+                        style={{ backgroundColor: '#7C4DFF', color: '#fff' }}
                       >
                         {getInitials(user.name)}
                       </AvatarFallback>
@@ -177,15 +166,15 @@ export function Header({
                 <DropdownMenuContent
                   align="end"
                   className="w-[280px] rounded-[24px] border border-border bg-card/95 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl z-[100]"
-                  data-agent="SourceCode"
+                  data-agent="Đồ Án 24h"
                 >
                   {/* User Info Header */}
                   <div className="flex flex-col px-3 py-2 pb-3 border-b border-border">
                     <span className="text-[15px] font-bold text-foreground leading-tight">
-                      {user.name || "Người dùng"}
+                      {user.name || 'Người dùng'}
                     </span>
                     <span className="text-xs text-muted-foreground truncate mt-1">
-                      {user.username || "user@example.com"}
+                      {user.username || 'user@example.com'}
                     </span>
                   </div>
 
@@ -221,9 +210,7 @@ export function Header({
                       className="w-full justify-start gap-3 px-3 py-2.5 h-auto rounded-[14px] text-sm font-medium text-destructive hover:bg-destructive/10 hover:text-destructive transition-all duration-200 disabled:opacity-60"
                     >
                       <LogOut className="h-4 w-4" />
-                      <span>
-                        {isLoggingOut ? "Đang đăng xuất..." : "Đăng xuất"}
-                      </span>
+                      <span>{isLoggingOut ? 'Đang đăng xuất...' : 'Đăng xuất'}</span>
                     </Button>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -234,15 +221,15 @@ export function Header({
               <Button
                 variant="ghost"
                 asChild
-                className="hidden sm:inline-flex text-foreground/70 hover:text-foreground"
+                className="hidden sm:inline-flex border border-input text-foreground/70 hover:text-foreground"
               >
-                <Link href="/login">Đăng nhập</Link>
+                <Link href="/register">Đăng ký</Link>
               </Button>
               <Button
                 asChild
                 className="hidden sm:inline-flex bg-primary hover:bg-primary/90 text-white rounded-[14px] px-5"
               >
-                <Link href="/contact">Liên hệ</Link>
+                <Link href="/login">Đăng nhập</Link>
               </Button>
               <Button
                 variant="ghost"

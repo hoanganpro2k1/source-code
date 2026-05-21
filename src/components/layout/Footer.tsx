@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Facebook, Mail, MessageCircle, Phone, Send } from "lucide-react";
-import Link from "next/link";
+import { Badge } from '@/components/ui/badge';
+import { Facebook, Mail, MessageCircle, Phone, Send } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export const Footer = () => {
   return (
@@ -12,19 +13,23 @@ export const Footer = () => {
           {/* Logo & Description */}
           <div className="lg:col-span-4 flex flex-col gap-6">
             <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
-                <span className="text-xl font-bold text-white">SC</span>
-              </div>
-              <span className="text-2xl font-bold tracking-tight text-foreground">
-                Source Code
+              <Image
+                src="/logo.jpg"
+                alt="Source Code Logo"
+                width={80}
+                height={80}
+                className="rounded-lg object-contain"
+                priority
+              />
+              <span className="text-3xl font-black tracking-tight text-foreground">
+                <span className="text-[#04315B]">ĐỒ ÁN</span> <span className="text-[#FF6A00]">24h</span>
               </span>
             </Link>
             <p className="text-muted-foreground leading-relaxed max-w-sm">
-              Chúng tôi cung cấp các dịch vụ phát triển web và các giải pháp
-              công nghệ. Luôn sẵn sàng hỗ trợ bạn 24/7.
+              Chúng tôi cung cấp các dịch vụ phát triển web và các giải pháp công nghệ. Luôn sẵn sàng hỗ trợ bạn 24/7.
             </p>
             <div className="flex flex-wrap gap-2">
-              {["React", "Node.js", "MongoDB", "Next.js"].map((tech) => (
+              {['React', 'Node.js', 'MongoDB', 'Next.js'].map((tech) => (
                 <Badge
                   key={tech}
                   variant="secondary"
@@ -38,39 +43,25 @@ export const Footer = () => {
 
           {/* Links 1 */}
           <div className="lg:col-span-2">
-            <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mb-6">
-              Sản phẩm
-            </h4>
+            <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mb-6">Sản phẩm</h4>
             <ul className="flex flex-col gap-4">
               <li>
-                <Link
-                  href="#"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
+                <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Source Code Web
                 </Link>
               </li>
               <li>
-                <Link
-                  href="#"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
+                <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Source Code Mobile
                 </Link>
               </li>
               <li>
-                <Link
-                  href="#"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
+                <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Đồ án AI / ML
                 </Link>
               </li>
               <li>
-                <Link
-                  href="#"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
+                <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Template & UI Kit
                 </Link>
               </li>
@@ -79,21 +70,15 @@ export const Footer = () => {
 
           {/* Links 2 */}
           <div className="lg:col-span-3">
-            <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mb-6">
-              Liên hệ
-            </h4>
+            <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mb-6">Liên hệ</h4>
             <ul className="flex flex-col gap-4">
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-primary" />
-                <span className="text-sm text-muted-foreground">
-                  098.343.9381
-                </span>
+                <span className="text-sm text-muted-foreground">098.343.9381</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-primary" />
-                <span className="text-sm text-muted-foreground">
-                  sourcecode.contact@gmail.com
-                </span>
+                <span className="text-sm text-muted-foreground">Đồ Án 24h.contact@gmail.com</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="mt-1">
@@ -108,9 +93,7 @@ export const Footer = () => {
 
           {/* Links 3 */}
           <div className="lg:col-span-3">
-            <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mb-6">
-              Mạng xã hội
-            </h4>
+            <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mb-6">Mạng xã hội</h4>
             <ul className="flex flex-col gap-4">
               <li>
                 <Link
@@ -156,22 +139,13 @@ export const Footer = () => {
             © 2026 Source Code. All rights reserved.
           </p>
           <div className="flex items-center gap-8">
-            <Link
-              href="#"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
+            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               Điều khoản
             </Link>
-            <Link
-              href="#"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
+            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               Bảo mật
             </Link>
-            <Link
-              href="#"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
+            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               FAQ
             </Link>
           </div>

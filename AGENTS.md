@@ -18,7 +18,7 @@ Always:
 # AI Project Instructions
 
 Project Name:
-SourceCode
+Đồ Án 24h
 
 This is a premium marketplace platform
 for selling source code projects
@@ -29,6 +29,7 @@ and graduation thesis projects.
 # Backend NestJS Integration (CRITICAL)
 
 Mã nguồn dự án Backend nằm ở thư mục riêng biệt:
+
 - **Đường dẫn Backend**: `D:\SourceDoan\be-source-doan`
 - **Địa chỉ Local**: `http://localhost:3001`
 - **Tài liệu ngữ cảnh**: Đọc thêm tại [.agent/context/backend.md](file:///d:/SourceDoan/source-doan/.agent/context/backend.md)
