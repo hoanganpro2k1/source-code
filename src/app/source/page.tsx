@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { ProductList } from "@/components/sections/source/ProductList";
-import { SidebarFilter } from "@/components/sections/source/SidebarFilter";
-import { TopFilter } from "@/components/sections/source/TopFilter";
+import { ProductList } from '@/components/sections/source/ProductList';
+import { SidebarFilter } from '@/components/sections/source/SidebarFilter';
+import { TopFilter } from '@/components/sections/source/TopFilter';
 
-export default function Đồ Án 24hPage() {
+export default function SourcePage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-10">
