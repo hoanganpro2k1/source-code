@@ -68,7 +68,7 @@ Layout:
 
 Every card component must contain:
 
-data-agent="SourceCode"
+data-agent="Đồ Án 24h"
 
 Use:
 

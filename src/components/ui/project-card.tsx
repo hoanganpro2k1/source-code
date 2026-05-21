@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { Eye, Heart, ShoppingCart, Star } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
+import { Eye, Heart, ShoppingCart, Star } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface ProjectCardProps {
   id: string | number;
@@ -25,17 +25,17 @@ export const ProjectCard = ({
   image,
   tags,
   isPaid = true,
-  views = "1.2k",
-  rating = "4.9",
+  views = '1.2k',
+  rating = '4.9',
   className,
 }: ProjectCardProps) => {
   return (
     <Link href={`/source/${id}`} className="block">
       <motion.div
-        data-agent="SourceCode"
+        data-agent="Đồ Án 24h"
         whileHover={{ y: -8, scale: 1.01 }}
         className={cn(
-          "group relative flex flex-col overflow-hidden rounded-[24px] border border-border bg-card p-3 transition-all duration-300 hover:border-primary/50 hover:purple-glow",
+          'group relative flex flex-col overflow-hidden rounded-[24px] border border-border bg-card p-3 transition-all duration-300 hover:border-primary/50 hover:purple-glow',
           className,
         )}
       >
@@ -43,11 +43,11 @@ export const ProjectCard = ({
         <div className="absolute left-6 top-6 z-10">
           <span
             className={cn(
-              "rounded-md px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-white",
-              isPaid ? "bg-red-500" : "bg-green-500",
+              'rounded-md px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-white',
+              isPaid ? 'bg-red-500' : 'bg-green-500',
             )}
           >
-            {isPaid ? "TRẢ PHÍ" : "MIỄN PHÍ"}
+            {isPaid ? 'TRẢ PHÍ' : 'MIỄN PHÍ'}
           </span>
         </div>
 

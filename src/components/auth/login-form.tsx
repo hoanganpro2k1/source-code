@@ -21,62 +21,58 @@ export const LoginForm = () => {
 
   return (
     <div className="flex flex-col gap-1">
-      <form onSubmit={onSubmit} className="space-y-4">
+      <form onSubmit={onSubmit} className="space-y-1">
         {/* Email */}
-        <div className="space-y-1">
-          <InputGroup className="h-12 rounded-xl bg-white/5">
-            <InputGroupAddon>
-              <Mail />
-            </InputGroupAddon>
-            <InputGroupInput id="email" type="email" placeholder="Email" {...register('email')} />
-          </InputGroup>
-          <div className="min-h-[18px]">
-            {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
-          </div>
+        <InputGroup className="h-12 rounded-xl bg-white/5">
+          <InputGroupAddon>
+            <Mail />
+          </InputGroupAddon>
+          <InputGroupInput id="email" type="email" placeholder="Email" {...register('email')} />
+        </InputGroup>
+        <div className="min-h-[18px]">
+          {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
         </div>
 
         {/* Mật khẩu */}
-        <div className="space-y-1">
-          <InputGroup className="h-12 rounded-xl bg-white/5">
-            <InputGroupAddon>
-              <Lock />
-            </InputGroupAddon>
-            <InputGroupInput
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Mật khẩu"
-              {...register('password')}
-            />
-            <InputGroupAddon align="inline-end">
-              <InputGroupButton onClick={() => setShowPassword(!showPassword)}>
-                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-              </InputGroupButton>
-            </InputGroupAddon>
-          </InputGroup>
-          <div className="min-h-[18px]">
-            {errors.password && <p className="text-xs text-red-500">{errors.password.message}</p>}
-          </div>
-          <div className="flex items-center justify-between">
-            <Link href="/forgot-password" className="text-xs text-primary hover:underline">
-              Quên mật khẩu?
-            </Link>
-          </div>
-        </div>
-
-        {/* Ghi nhớ */}
-        <div className="flex items-center gap-3">
-          <Checkbox
-            id="remember"
-            className="rounded-sm border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-white"
+        <InputGroup className="h-12 rounded-xl bg-white/5">
+          <InputGroupAddon>
+            <Lock />
+          </InputGroupAddon>
+          <InputGroupInput
+            id="password"
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Mật khẩu"
+            {...register('password')}
           />
-          <Label htmlFor="remember" className="text-sm text-muted-foreground font-normal cursor-pointer">
-            Ghi nhớ đăng nhập
-          </Label>
+          <InputGroupAddon align="inline-end">
+            <InputGroupButton onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+            </InputGroupButton>
+          </InputGroupAddon>
+        </InputGroup>
+        <div className="min-h-[18px]">
+          {errors.password && <p className="text-xs text-red-500">{errors.password.message}</p>}
+        </div>
+        <div className="flex justify-between items-center">
+          <Link href="/forgot-password" className="text-xs text-primary hover:underline">
+            Quên mật khẩu?
+          </Link>
+
+          {/* Ghi nhớ */}
+          <div className="flex items-center gap-3">
+            <Checkbox
+              id="remember"
+              className="rounded-sm border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-white"
+            />
+            <Label htmlFor="remember" className="text-sm text-muted-foreground font-normal cursor-pointer">
+              Ghi nhớ đăng nhập
+            </Label>
+          </div>
         </div>
 
         <Button
           type="submit"
-          className="w-full h-12 text-base font-bold transition-all duration-300"
+          className="w-full mt-4 h-12 text-base font-bold transition-all duration-300"
           disabled={isLoading}
         >
           {isLoading ? (
