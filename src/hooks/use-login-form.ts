@@ -58,9 +58,25 @@ export const useLoginForm = () => {
     },
   });
 
+  const googleMutation = useMutation({
+    mutationFn: () => authService.getGoogleLink(),
+    onSuccess: (data) => {
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        toast.error("Không tìm thấy liên kết đăng nhập bằng Google.");
+      }
+    },
+    onError: (error: unknown) => {
+      toast.error(parseApiError(error, "Không thể khởi động đăng nhập bằng Google."));
+    },
+  });
+
   return {
     form,
     isLoading: mutation.isPending,
+    isGoogleLoading: googleMutation.isPending,
     onSubmit: form.handleSubmit((values) => mutation.mutate(values)),
+    handleGoogleLogin: () => googleMutation.mutate(),
   };
 };

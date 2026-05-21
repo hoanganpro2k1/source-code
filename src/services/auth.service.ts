@@ -31,5 +31,15 @@ export const authService = {
     const res = await axios.post("/api/auth/logout");
     return res.data;
   },
+
+  getGoogleLink: async () => {
+    const res = await apiClient.get<{ url: string }>("/auth/google-link");
+    return res.data;
+  },
+
+  googleLoginCallback: async (accessToken: string, refreshToken: string) => {
+    const res = await axios.post("/api/auth/google", { accessToken, refreshToken });
+    return res.data;
+  },
 };
 

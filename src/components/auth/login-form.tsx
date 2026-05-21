@@ -10,7 +10,7 @@ import { useLoginForm } from "@/hooks/use-login-form";
 
 export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { form, isLoading, onSubmit } = useLoginForm();
+  const { form, isLoading, onSubmit, handleGoogleLogin, isGoogleLoading } = useLoginForm();
   
   const {
     register,
@@ -108,16 +108,23 @@ export const LoginForm = () => {
       <div className="grid grid-cols-2 gap-4">
         <Button
           variant="outline"
-          className="h-12 gap-2 text-foreground/80 hover:bg-foreground/5"
+          className="h-12 gap-2 text-foreground/80 hover:bg-foreground/5 relative overflow-hidden"
           type="button"
+          onClick={handleGoogleLogin}
+          disabled={isLoading || isGoogleLoading}
         >
-          <Chrome size={18} />
-          Google
+          {isGoogleLoading ? (
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary/30 border-t-primary" />
+          ) : (
+            <Chrome size={18} />
+          )}
+          <span>Google</span>
         </Button>
         <Button
           variant="outline"
           className="h-12 gap-2 text-foreground/80 hover:bg-foreground/5"
           type="button"
+          disabled={isLoading || isGoogleLoading}
         >
           <Github size={18} />
           Github
