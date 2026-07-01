@@ -1,0 +1,24 @@
+{
+  "name": "Đồ Án 24h",
+  "short_name": "Đồ Án 24h",
+  "description": "Nền tảng mua bán source code, đồ án tốt nghiệp uy tín dành cho sinh viên và lập trình viên.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060816",
+  "theme_color": "#7C4DFF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
