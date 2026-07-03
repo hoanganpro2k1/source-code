@@ -63,8 +63,7 @@ export const viewport: Viewport = {
   ],
 };
 
-import { Footer } from '@/components/layout/Footer';
-import { Header } from '@/components/layout/Header';
+import { SiteChrome } from '@/components/layout/SiteChrome';
 import { ThemeProvider } from '@/components/theme-provider';
 import { AuthProvider } from '@/providers/auth-provider';
 import QueryProvider from '@/providers/query-provider';
@@ -85,9 +84,7 @@ export default async function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <QueryProvider>
             <AuthProvider initialAccessToken={accessToken}>
-              <Header initialAccessToken={accessToken} />
-              <main className="flex-1">{children}</main>
-              <Footer />
+              <SiteChrome initialAccessToken={accessToken}>{children}</SiteChrome>
               <Toaster richColors closeButton duration={2000} position="bottom-right" />
             </AuthProvider>
           </QueryProvider>
