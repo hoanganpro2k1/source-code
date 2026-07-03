@@ -42,7 +42,7 @@ function CheckoutContent() {
           Không tìm thấy thông tin đơn hàng để thanh toán.
         </p>
         <Link href="/cart">
-          <Button className="rounded-2xl">Quay lại giỏ hàng</Button>
+          <Button className="rounded-sm">Quay lại giỏ hàng</Button>
         </Link>
       </div>
     );
@@ -63,7 +63,7 @@ function CheckoutContent() {
           Không thể tải thông tin đơn hàng.
         </p>
         <Link href="/cart">
-          <Button className="rounded-2xl">Quay lại giỏ hàng</Button>
+          <Button className="rounded-sm">Quay lại giỏ hàng</Button>
         </Link>
       </div>
     );
@@ -100,7 +100,7 @@ function CheckoutContent() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex flex-col gap-6 p-8 rounded-[40px] border border-border bg-card shadow-2xl items-center text-center relative overflow-hidden"
+            className="flex flex-col gap-6 p-8 rounded-sm border border-border bg-card shadow-2xl items-center text-center relative overflow-hidden"
           >
             {isPaid && (
               <div className="absolute inset-0 z-20 bg-primary/95 backdrop-blur-sm flex flex-col items-center justify-center text-white p-8">
@@ -119,7 +119,7 @@ function CheckoutContent() {
                   nhận tự động.
                 </p>
                 <Link href="/source" className="w-full">
-                  <Button className="w-full h-14 bg-white text-primary hover:bg-white/90 font-bold rounded-2xl gap-2">
+                  <Button className="w-full h-14 bg-white text-primary hover:bg-white/90 font-bold rounded-sm gap-2">
                     Truy cập kho sản phẩm <ArrowRight className="h-5 w-5" />
                   </Button>
                 </Link>
@@ -133,7 +133,7 @@ function CheckoutContent() {
                 </div>
                 <h2 className="text-3xl font-black mb-2">Đơn hàng đã bị hủy</h2>
                 <Link href="/cart" className="w-full">
-                  <Button className="w-full h-14 bg-white text-red-500 hover:bg-white/90 font-bold rounded-2xl">
+                  <Button className="w-full h-14 bg-white text-red-500 hover:bg-white/90 font-bold rounded-sm">
                     Quay lại giỏ hàng
                   </Button>
                 </Link>
@@ -149,7 +149,7 @@ function CheckoutContent() {
               </p>
             </div>
 
-            <div className="relative aspect-square w-full max-w-[280px] p-4 bg-white rounded-3xl shadow-inner">
+            <div className="relative aspect-square w-full max-w-[280px] p-4 bg-white rounded-sm shadow-inner">
               <Image
                 src={qrUrl}
                 alt="Payment QR"
@@ -159,7 +159,7 @@ function CheckoutContent() {
               />
             </div>
 
-            <div className="flex items-center gap-3 py-3 px-6 rounded-2xl bg-primary/5 border border-primary/10 text-primary animate-pulse">
+            <div className="flex items-center gap-3 py-3 px-6 rounded-sm bg-primary/5 border border-primary/10 text-primary animate-pulse">
               <Loader2 className="h-4 w-4 animate-spin" />
               <span className="text-xs font-bold uppercase tracking-widest">
                 Đang chờ thanh toán...
@@ -178,7 +178,7 @@ function CheckoutContent() {
             animate={{ opacity: 1, x: 0 }}
             className="flex flex-col gap-6"
           >
-            <div className="p-8 rounded-[40px] border border-border bg-card shadow-xl flex flex-col gap-6">
+            <div className="p-8 rounded-sm border border-border bg-card shadow-xl flex flex-col gap-6">
               <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">
                 Thông tin chuyển khoản
               </h3>
@@ -217,11 +217,11 @@ function CheckoutContent() {
                       {item.copyable && (
                         <button
                           onClick={() => handleCopy(item.value, item.label)}
-                          className="h-8 w-8 flex items-center justify-center rounded-lg bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all relative"
+                          className="h-8 w-8 flex items-center justify-center rounded-sm bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all relative"
                         >
                           <Copy className="h-4 w-4" />
                           {copied === item.label && (
-                            <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-primary text-[10px] text-white rounded shadow-lg whitespace-nowrap">
+                            <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-primary text-[10px] text-white rounded-sm shadow-lg whitespace-nowrap">
                               Đã copy
                             </span>
                           )}
@@ -233,7 +233,7 @@ function CheckoutContent() {
               </div>
             </div>
 
-            <div className="p-6 rounded-[32px] bg-primary/5 border border-primary/10 flex items-start gap-4">
+            <div className="p-6 rounded-sm bg-primary/5 border border-primary/10 flex items-start gap-4">
               <ShieldCheck className="h-6 w-6 text-primary shrink-0" />
               <div className="flex flex-col gap-1">
                 <h4 className="text-sm font-bold text-primary">

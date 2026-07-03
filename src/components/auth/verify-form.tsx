@@ -104,7 +104,7 @@ function OtpInput({
           onPaste={handlePaste}
           onFocus={(e) => e.target.select()}
           className={cn(
-            'w-11 h-14 rounded-xl border text-center text-xl font-bold transition-all duration-200',
+            'w-11 h-14 rounded-sm border text-center text-xl font-bold transition-all duration-200',
             'bg-white/5 text-foreground outline-none',
             'border-border focus:border-primary focus:ring-2 focus:ring-primary/30',
             'disabled:opacity-50 disabled:cursor-not-allowed',
@@ -125,7 +125,7 @@ function TwoFactorTypeTabs({
   onChange: (v: TwoFactorType) => void;
 }) {
   return (
-    <div className="flex rounded-xl bg-white/5 border border-white/10 p-1">
+    <div className="flex rounded-sm bg-white/5 border border-white/10 p-1">
       {(
         [
           { id: 'totp' as TwoFactorType, icon: Smartphone, label: 'Ứng dụng xác thực' },
@@ -137,7 +137,7 @@ function TwoFactorTypeTabs({
           type="button"
           onClick={() => onChange(id)}
           className={cn(
-            'flex-1 flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-medium transition-all duration-200',
+            'flex-1 flex items-center justify-center gap-2 rounded-sm px-3 py-2.5 text-xs font-medium transition-all duration-200',
             value === id
               ? 'bg-primary text-white shadow-sm shadow-primary/30'
               : 'text-muted-foreground hover:text-foreground',

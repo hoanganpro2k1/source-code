@@ -60,7 +60,7 @@ export const ForgotPasswordForm = () => {
     <form className="flex flex-col gap-1" onSubmit={onSubmit}>
       {/* Email */}
       <div className="flex flex-col gap-1">
-        <InputGroup className="h-12 rounded-xl bg-white/5">
+        <InputGroup className="h-12 rounded-sm bg-white/5">
           <InputGroupAddon>
             <Mail />
           </InputGroupAddon>
@@ -74,7 +74,7 @@ export const ForgotPasswordForm = () => {
       {/* Mã OTP */}
       <div className="flex flex-col gap-1">
         <div className="flex gap-2">
-          <InputGroup className="h-12 rounded-xl bg-white/5 flex-1">
+          <InputGroup className="h-12 rounded-sm bg-white/5 flex-1">
             <InputGroupAddon>
               <ShieldCheck />
             </InputGroupAddon>
@@ -91,7 +91,7 @@ export const ForgotPasswordForm = () => {
             type="button"
             onClick={handleSendOTP}
             disabled={otpLoading || countdown > 0}
-            className="h-12 px-4 rounded-xl border border-primary/40 bg-primary/10 text-primary text-sm font-semibold whitespace-nowrap hover:bg-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2 min-w-[120px] justify-center"
+            className="h-12 px-4 rounded-sm border border-primary/40 bg-primary/10 text-primary text-sm font-semibold whitespace-nowrap hover:bg-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2 min-w-[120px] justify-center"
           >
             {otpLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -133,7 +133,7 @@ export const ForgotPasswordForm = () => {
 
       {/* Mật khẩu mới */}
       <div className="flex flex-col gap-1">
-        <InputGroup className="h-12 rounded-xl bg-white/5">
+        <InputGroup className="h-12 rounded-sm bg-white/5">
           <InputGroupAddon>
             <Lock />
           </InputGroupAddon>
@@ -158,7 +158,7 @@ export const ForgotPasswordForm = () => {
 
       {/* Xác nhận mật khẩu mới */}
       <div className="flex flex-col gap-1">
-        <InputGroup className="h-12 rounded-xl bg-white/5">
+        <InputGroup className="h-12 rounded-sm bg-white/5">
           <InputGroupAddon>
             <Lock />
           </InputGroupAddon>
@@ -186,7 +186,7 @@ export const ForgotPasswordForm = () => {
         type="submit"
         size="lg"
         disabled={isSubmitting}
-        className="h-12 rounded-xl text-base font-bold bg-primary shadow-lg shadow-primary/20 transition-all disabled:opacity-70 mt-2"
+        className="h-12 rounded-sm text-base font-bold bg-primary shadow-lg shadow-primary/20 transition-all disabled:opacity-70 mt-2"
       >
         {isSubmitting ? (
           <>

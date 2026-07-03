@@ -19,7 +19,7 @@ export const ProductMedia = () => {
   return (
     <div className="flex flex-col gap-4">
       {/* Main Image Slider */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[32px] border border-border bg-muted">
+      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm border border-border bg-muted">
       <Image
         src={IMAGES[activeIndex]}
         alt="Product Preview"
@@ -44,7 +44,7 @@ export const ProductMedia = () => {
       </button>
 
       {/* Counter Tag */}
-      <div className="absolute bottom-6 left-6 px-3 py-1.5 rounded-lg bg-black/40 backdrop-blur-md text-white text-xs font-medium">
+      <div className="absolute bottom-6 left-6 px-3 py-1.5 rounded-sm bg-black/40 backdrop-blur-md text-white text-xs font-medium">
         {activeIndex + 1} / {IMAGES.length}
       </div>
     </div>
@@ -56,7 +56,7 @@ export const ProductMedia = () => {
           key={i}
           onClick={() => setActiveIndex(i)}
           className={cn(
-            "relative aspect-square rounded-xl overflow-hidden border-2 transition-all",
+            "relative aspect-square rounded-sm overflow-hidden border-2 transition-all",
             activeIndex === i ? "border-primary" : "border-transparent opacity-60 hover:opacity-100"
           )}
         >
@@ -70,7 +70,7 @@ export const ProductMedia = () => {
         </button>
       ))}
         {/* Video Thumbnail */}
-        <button className="relative aspect-square rounded-xl overflow-hidden border-2 border-transparent bg-muted flex items-center justify-center group">
+        <button className="relative aspect-square rounded-sm overflow-hidden border-2 border-transparent bg-muted flex items-center justify-center group">
           <Play className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" />
           <div className="absolute inset-0 bg-black/10" />
         </button>

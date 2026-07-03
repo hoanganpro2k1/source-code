@@ -194,7 +194,7 @@ export const Hero = () => {
             >
               {/* Browser Window */}
               <div
-                className="rounded-t-2xl overflow-hidden"
+                className="rounded-t-sm overflow-hidden"
                 style={{
                   background: "#2d2d3f",
                   padding: "12px 12px 0px",
@@ -206,7 +206,7 @@ export const Hero = () => {
                   <div className="w-2 h-2 rounded-full bg-[#374151]" />
                 </div>
 
-                <div className="rounded-t-lg overflow-hidden bg-[#0F172A]">
+                <div className="rounded-t-sm overflow-hidden bg-[#0F172A]">
                   {/* Browser Header */}
                   <div className="flex items-center gap-2 px-3 py-2 bg-[#1E293B]">
                     <div className="flex gap-1.5">
@@ -214,7 +214,7 @@ export const Hero = () => {
                       <div className="w-2.5 h-2.5 rounded-full bg-[#eab308]" />
                       <div className="w-2.5 h-2.5 rounded-full bg-[#22c55e]" />
                     </div>
-                    <div className="flex-1 h-5 rounded ml-2 flex items-center px-2 bg-white/5">
+                    <div className="flex-1 h-5 rounded-sm ml-2 flex items-center px-2 bg-white/5">
                       <span className="text-[9px] text-[#64748B]">
                         localhost:3000/admin/dashboard
                       </span>
@@ -225,21 +225,21 @@ export const Hero = () => {
                   <div className="flex" style={{ height: "280px" }}>
                     {/* Sidebar */}
                     <div className="flex flex-col gap-2 py-3 px-2 w-[52px] bg-[#1E293B] border-r border-white/5">
-                      <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#3B82F6] to-[#6366F1] mx-auto flex items-center justify-center">
+                      <div className="w-7 h-7 rounded-sm bg-gradient-to-br from-[#3B82F6] to-[#6366F1] mx-auto flex items-center justify-center">
                         <Code className="h-3 w-3 text-white" />
                       </div>
-                      <div className="w-7 h-7 rounded-lg mx-auto bg-blue-500/15" />
-                      <div className="w-7 h-7 rounded-lg mx-auto bg-white/5" />
-                      <div className="w-7 h-7 rounded-lg mx-auto bg-white/5" />
-                      <div className="w-7 h-7 rounded-lg mx-auto bg-white/5" />
-                      <div className="w-7 h-7 rounded-lg mx-auto bg-white/5" />
+                      <div className="w-7 h-7 rounded-sm mx-auto bg-blue-500/15" />
+                      <div className="w-7 h-7 rounded-sm mx-auto bg-white/5" />
+                      <div className="w-7 h-7 rounded-sm mx-auto bg-white/5" />
+                      <div className="w-7 h-7 rounded-sm mx-auto bg-white/5" />
+                      <div className="w-7 h-7 rounded-sm mx-auto bg-white/5" />
                     </div>
 
                     {/* Main Feed */}
                     <div className="flex-1 p-3 overflow-hidden">
                       {/* Top Cards */}
                       <div className="grid grid-cols-3 gap-2 mb-3">
-                        <div className="rounded-lg p-2 bg-white/5 border border-white/10">
+                        <div className="rounded-sm p-2 bg-white/5 border border-white/10">
                           <p className="text-[8px] text-[#64748B]">Revenue</p>
                           <p className="text-[11px] font-bold text-[#F8FAFC] mt-0.5">
                             $12,450
@@ -248,7 +248,7 @@ export const Hero = () => {
                             +24%
                           </p>
                         </div>
-                        <div className="rounded-lg p-2 bg-white/5 border border-white/10">
+                        <div className="rounded-sm p-2 bg-white/5 border border-white/10">
                           <p className="text-[8px] text-[#64748B]">Users</p>
                           <p className="text-[11px] font-bold text-[#F8FAFC] mt-0.5">
                             3,842
@@ -257,7 +257,7 @@ export const Hero = () => {
                             +18%
                           </p>
                         </div>
-                        <div className="rounded-lg p-2 bg-white/5 border border-white/10">
+                        <div className="rounded-sm p-2 bg-white/5 border border-white/10">
                           <p className="text-[8px] text-[#64748B]">Orders</p>
                           <p className="text-[11px] font-bold text-[#F8FAFC] mt-0.5">
                             1,249
@@ -269,7 +269,7 @@ export const Hero = () => {
                       </div>
 
                       {/* Chart Area */}
-                      <div className="rounded-lg p-2 mb-3 bg-white/[0.03] border border-white/10">
+                      <div className="rounded-sm p-2 mb-3 bg-white/[0.03] border border-white/10">
                         <p className="text-[8px] text-[#94A3B8] mb-2">
                           Monthly Revenue
                         </p>
@@ -293,7 +293,7 @@ export const Hero = () => {
                       </div>
 
                       {/* Project Table */}
-                      <div className="rounded-lg overflow-hidden bg-white/[0.03] border border-white/10">
+                      <div className="rounded-sm overflow-hidden bg-white/[0.03] border border-white/10">
                         <div className="flex gap-2 px-2 py-1.5 border-b border-white/10">
                           <span className="text-[7px] text-[#94A3B8] flex-1">
                             Project
@@ -346,7 +346,7 @@ export const Hero = () => {
 
               {/* Bottom Support */}
               <div
-                className="mx-auto rounded-b-xl"
+                className="mx-auto rounded-b-sm"
                 style={{
                   height: "14px",
                   width: "110%",
@@ -365,10 +365,10 @@ export const Hero = () => {
             <motion.div
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -right-6 top-12 z-20 rounded-2xl p-4 bg-white/95 border border-indigo-500/10 shadow-2xl backdrop-blur-xl min-w-[160px]"
+              className="absolute -right-6 top-12 z-20 rounded-sm p-4 bg-white/95 border border-indigo-500/10 shadow-2xl backdrop-blur-xl min-w-[160px]"
             >
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-green-500/15">
+                <div className="w-8 h-8 rounded-sm flex items-center justify-center bg-green-500/15">
                   <TrendingUp className="h-4 w-4 text-green-500" />
                 </div>
                 <span className="text-xs font-medium text-slate-500">
@@ -387,10 +387,10 @@ export const Hero = () => {
                 ease: "easeInOut",
                 delay: 0.5,
               }}
-              className="absolute -left-8 bottom-20 z-20 rounded-2xl p-4 bg-white/95 border border-indigo-500/10 shadow-2xl backdrop-blur-xl min-w-[185px]"
+              className="absolute -left-8 bottom-20 z-20 rounded-sm p-4 bg-white/95 border border-indigo-500/10 shadow-2xl backdrop-blur-xl min-w-[185px]"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-500">
+                <div className="w-10 h-10 rounded-sm flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-500">
                   <Download className="h-5 w-5 text-white" />
                 </div>
                 <div>
@@ -411,21 +411,21 @@ export const Hero = () => {
               </div>
             </motion.div>
 
-            <div className="absolute right-4 -bottom-2 z-20 rounded-2xl p-3 bg-white/95 border border-indigo-500/10 shadow-xl backdrop-blur-xl">
+            <div className="absolute right-4 -bottom-2 z-20 rounded-sm p-3 bg-white/95 border border-indigo-500/10 shadow-xl backdrop-blur-xl">
               <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-500/5 border border-indigo-500/10">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-indigo-500/5 border border-indigo-500/10">
                   <Code className="h-3 w-3 text-blue-500" />
                   <span className="text-xs font-medium text-slate-700">
                     React
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-500/5 border border-indigo-500/10">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-indigo-500/5 border border-indigo-500/10">
                   <Database className="h-3 w-3 text-purple-500" />
                   <span className="text-xs font-medium text-slate-700">
                     MongoDB
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-500/5 border border-indigo-500/10">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-indigo-500/5 border border-indigo-500/10">
                   <Layers className="h-3 w-3 text-indigo-500" />
                   <span className="text-xs font-medium text-slate-700">
                     Node.js

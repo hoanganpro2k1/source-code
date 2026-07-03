@@ -91,21 +91,21 @@ export const ProductList = () => {
 
       {/* Pagination */}
       <div className="flex items-center justify-center gap-2">
-        <Button size="icon" variant="outline" className="h-10 w-10 rounded-xl border-border hover:bg-muted">
+        <Button size="icon" variant="outline" className="h-10 w-10 rounded-sm border-border hover:bg-muted">
           <ChevronLeft className="h-4 w-4" />
         </Button>
 
         <div className="flex items-center gap-2">
-          <Button className="h-10 w-10 rounded-xl bg-primary text-white shadow-lg">1</Button>
+          <Button className="h-10 w-10 rounded-sm bg-primary text-white shadow-lg">1</Button>
           <Button
             variant="ghost"
-            className="h-10 w-10 rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
+            className="h-10 w-10 rounded-sm text-muted-foreground hover:bg-muted hover:text-foreground"
           >
             2
           </Button>
           <Button
             variant="ghost"
-            className="h-10 w-10 rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
+            className="h-10 w-10 rounded-sm text-muted-foreground hover:bg-muted hover:text-foreground"
           >
             3
           </Button>
@@ -114,13 +114,13 @@ export const ProductList = () => {
           </div>
           <Button
             variant="ghost"
-            className="h-10 w-10 rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
+            className="h-10 w-10 rounded-sm text-muted-foreground hover:bg-muted hover:text-foreground"
           >
             20
           </Button>
         </div>
 
-        <Button size="icon" variant="outline" className="h-10 w-10 rounded-xl border-border hover:bg-muted">
+        <Button size="icon" variant="outline" className="h-10 w-10 rounded-sm border-border hover:bg-muted">
           <ChevronRight className="h-4 w-4" />
         </Button>
       </div>

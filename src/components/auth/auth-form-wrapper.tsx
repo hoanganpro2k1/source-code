@@ -19,7 +19,7 @@ export const AuthFormWrapper = ({ children, title, subtitle, className }: AuthFo
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className={cn(
-        'w-full max-w-xl overflow-hidden rounded-[24px] border border-border bg-card/60 p-8 backdrop-blur-xl md:p-10',
+        'w-full max-w-xl overflow-hidden rounded-sm border border-border bg-card/60 p-8 backdrop-blur-xl md:p-10',
         'purple-glow shadow-2xl',
         className,
       )}
@@ -32,7 +32,7 @@ export const AuthFormWrapper = ({ children, title, subtitle, className }: AuthFo
             alt="Source Code Logo"
             width={80}
             height={80}
-            className="rounded-lg object-contain"
+            className="rounded-sm object-contain"
             style={{ width: '80px', height: '80px' }}
             priority
           />

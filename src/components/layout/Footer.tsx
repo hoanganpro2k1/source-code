@@ -18,7 +18,7 @@ export const Footer = () => {
                 alt="Source Code Logo"
                 width={80}
                 height={80}
-                className="rounded-lg object-contain"
+                className="rounded-sm object-contain"
                 style={{ width: '80px', height: '80px' }}
                 priority
               />
@@ -99,7 +99,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="#"
-                  className="flex items-center gap-3 p-3 rounded-xl border border-border hover:border-primary/50 hover:bg-primary/5 transition-all group"
+                  className="flex items-center gap-3 p-3 rounded-sm border border-border hover:border-primary/50 hover:bg-primary/5 transition-all group"
                 >
                   <Facebook className="h-5 w-5 text-blue-500" />
                   <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
@@ -110,7 +110,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="#"
-                  className="flex items-center gap-3 p-3 rounded-xl border border-border hover:border-primary/50 hover:bg-primary/5 transition-all group"
+                  className="flex items-center gap-3 p-3 rounded-sm border border-border hover:border-primary/50 hover:bg-primary/5 transition-all group"
                 >
                   <div className="h-5 w-5 rounded-full bg-red-500 flex items-center justify-center text-[10px] text-white font-bold">
                     SC
@@ -123,7 +123,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="#"
-                  className="flex items-center gap-3 p-3 rounded-xl border border-border hover:border-primary/50 hover:bg-primary/5 transition-all group"
+                  className="flex items-center gap-3 p-3 rounded-sm border border-border hover:border-primary/50 hover:bg-primary/5 transition-all group"
                 >
                   <MessageCircle className="h-5 w-5 text-blue-400" />
                   <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">

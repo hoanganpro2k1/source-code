@@ -8,7 +8,7 @@ export const Affiliate = () => {
   return (
     <section className="py-20 overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="relative rounded-[40px] bg-primary/5 border border-primary/10 p-8 lg:p-16 overflow-hidden">
+        <div className="relative rounded-sm bg-primary/5 border border-primary/10 p-8 lg:p-16 overflow-hidden">
           {/* Background Elements */}
           <div className="absolute top-0 right-0 -z-10 h-64 w-64 bg-primary/20 blur-[100px] rounded-full" />
 
@@ -35,7 +35,7 @@ export const Affiliate = () => {
               <div className="flex items-center gap-4 mt-2">
                 <Button
                   size="lg"
-                  className="bg-orange-500 hover:bg-orange-600 text-white rounded-2xl px-10 py-7 text-lg font-bold"
+                  className="bg-orange-500 hover:bg-orange-600 text-white rounded-sm px-10 py-7 text-lg font-bold"
                 >
                   Tìm hiểu ngay
                 </Button>
@@ -49,7 +49,7 @@ export const Affiliate = () => {
               className="relative"
             >
               {/* Stats Card Mockup */}
-              <div className="relative rounded-[32px] border border-border bg-card p-8 shadow-xl purple-glow">
+              <div className="relative rounded-sm border border-border bg-card p-8 shadow-xl purple-glow">
                 <div className="flex items-center justify-between mb-8">
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">
@@ -59,7 +59,7 @@ export const Affiliate = () => {
                       1.250.000đ
                     </h3>
                   </div>
-                  <div className="h-12 w-12 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-500">
+                  <div className="h-12 w-12 rounded-sm bg-orange-500/10 flex items-center justify-center text-orange-500">
                     <TrendingUp className="h-6 w-6" />
                   </div>
                 </div>
@@ -72,7 +72,7 @@ export const Affiliate = () => {
                       initial={{ height: 0 }}
                       whileInView={{ height: `${height}%` }}
                       transition={{ delay: i * 0.1, duration: 0.5 }}
-                      className="flex-1 rounded-t-lg bg-orange-500/20 hover:bg-orange-500/40 transition-colors"
+                      className="flex-1 rounded-t-sm bg-orange-500/20 hover:bg-orange-500/40 transition-colors"
                     />
                   ))}
                 </div>
@@ -91,7 +91,7 @@ export const Affiliate = () => {
 
                 {/* Floating Notification */}
                 <div className="absolute -top-6 -right-6 animate-float">
-                  <div className="bg-background/80 backdrop-blur-md border border-border p-3 rounded-2xl shadow-lg flex items-center gap-3">
+                  <div className="bg-background/80 backdrop-blur-md border border-border p-3 rounded-sm shadow-lg flex items-center gap-3">
                     <div className="h-8 w-8 rounded-full bg-green-500/20 flex items-center justify-center">
                       <Share2 className="h-4 w-4 text-green-500" />
                     </div>

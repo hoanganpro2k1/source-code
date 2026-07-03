@@ -63,10 +63,10 @@ export const ProductInfo = () => {
       <div className="flex flex-col gap-6">
         <div className="text-4xl font-black text-primary">800,000đ</div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 rounded-[24px] bg-muted/50 border border-border/50">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 rounded-sm bg-muted/50 border border-border/50">
           {specs.map((spec, i) => (
             <div key={i} className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-background text-muted-foreground shadow-sm">
+              <div className="flex h-8 w-8 items-center justify-center rounded-sm bg-background text-muted-foreground shadow-sm">
                 {spec.icon}
               </div>
               <div className="flex flex-col">
@@ -78,10 +78,10 @@ export const ProductInfo = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-2">
-          <Button size="lg" className="flex-1 h-14 rounded-2xl gap-2 text-base font-bold bg-primary shadow-lg shadow-primary/20">
+          <Button size="lg" className="flex-1 h-14 rounded-sm gap-2 text-base font-bold bg-primary shadow-lg shadow-primary/20">
             <PlayCircle className="h-5 w-5" /> Dùng thử demo
           </Button>
-          <Button size="lg" variant="outline" className="flex-1 h-14 rounded-2xl gap-2 text-base font-bold border-border text-foreground hover:bg-muted">
+          <Button size="lg" variant="outline" className="flex-1 h-14 rounded-sm gap-2 text-base font-bold border-border text-foreground hover:bg-muted">
             <MessageSquare className="h-5 w-5" /> Liên hệ mua ngay
           </Button>
         </div>

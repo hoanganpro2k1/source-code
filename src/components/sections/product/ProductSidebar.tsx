@@ -20,7 +20,7 @@ export const ProductSidebar = () => {
   return (
     <div className="flex flex-col gap-8">
       {/* Pricing Plans */}
-      <div className="flex flex-col gap-4 p-6 rounded-[32px] border border-border bg-card shadow-xl purple-glow">
+      <div className="flex flex-col gap-4 p-6 rounded-sm border border-border bg-card shadow-xl purple-glow">
         <h3 className="text-lg font-bold text-foreground">Gói sản phẩm</h3>
 
         <div className="flex flex-col gap-3">
@@ -28,7 +28,7 @@ export const ProductSidebar = () => {
           <button
             onClick={() => setSelectedPlan("full")}
             className={cn(
-              "flex flex-col gap-4 p-4 rounded-2xl border-2 transition-all text-left",
+              "flex flex-col gap-4 p-4 rounded-sm border-2 transition-all text-left",
               selectedPlan === "full"
                 ? "border-primary bg-primary/5"
                 : "border-border hover:border-primary/30",
@@ -61,7 +61,7 @@ export const ProductSidebar = () => {
           <button
             onClick={() => setSelectedPlan("premium")}
             className={cn(
-              "flex flex-col gap-3 p-4 rounded-2xl border-2 transition-all text-left",
+              "flex flex-col gap-3 p-4 rounded-sm border-2 transition-all text-left",
               selectedPlan === "premium"
                 ? "border-primary bg-primary/5"
                 : "border-border hover:border-primary/30",
@@ -82,7 +82,7 @@ export const ProductSidebar = () => {
           </button>
         </div>
 
-        <div className="p-4 rounded-xl bg-primary/10 border border-primary/20 flex items-start gap-3 mt-2">
+        <div className="p-4 rounded-sm bg-primary/10 border border-primary/20 flex items-start gap-3 mt-2">
           <ShieldCheck className="h-5 w-5 text-primary shrink-0" />
           <p className="text-xs text-primary/80 leading-relaxed font-medium">
             Bạn sẽ được dùng thử demo trước khi quyết định mua hàng để đảm bảo
@@ -94,13 +94,13 @@ export const ProductSidebar = () => {
           <Button
             size="lg"
             variant="outline"
-            className="h-14 rounded-2xl gap-2 text-base font-bold w-full border-primary text-primary hover:bg-primary/5"
+            className="h-14 rounded-sm gap-2 text-base font-bold w-full border-primary text-primary hover:bg-primary/5"
           >
             <ShoppingCart className="h-5 w-5" /> Thêm vào giỏ hàng
           </Button>
           <Button
             size="lg"
-            className="h-14 rounded-2xl gap-2 text-base font-bold w-full bg-primary"
+            className="h-14 rounded-sm gap-2 text-base font-bold w-full bg-primary"
           >
             <MessageCircle className="h-5 w-5" /> Liên hệ mua ngay
           </Button>
@@ -128,7 +128,7 @@ export const ProductSidebar = () => {
           ].map((ch, i) => (
             <button
               key={i}
-              className="flex flex-col items-center gap-2 p-3 rounded-xl border border-border hover:bg-muted transition-colors"
+              className="flex flex-col items-center gap-2 p-3 rounded-sm border border-border hover:bg-muted transition-colors"
             >
               {ch.icon}
               <span className="text-[10px] font-bold text-muted-foreground">
@@ -140,7 +140,7 @@ export const ProductSidebar = () => {
       </div>
 
       {/* Commitments */}
-      <div className="flex flex-col gap-4 p-6 rounded-[32px] border border-border bg-card">
+      <div className="flex flex-col gap-4 p-6 rounded-sm border border-border bg-card">
         <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">
           Cam kết từ CodeDoan
         </h3>
@@ -164,7 +164,7 @@ export const ProductSidebar = () => {
             },
           ].map((item, i) => (
             <div key={i} className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-muted">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-muted">
                 {item.icon}
               </div>
               <span className="text-sm font-medium text-foreground/80 leading-snug">
@@ -176,7 +176,7 @@ export const ProductSidebar = () => {
       </div>
 
       {/* Info Table */}
-      <div className="flex flex-col gap-4 p-6 rounded-[32px] border border-border bg-card">
+      <div className="flex flex-col gap-4 p-6 rounded-sm border border-border bg-card">
         <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">
           Thông tin dự án
         </h3>

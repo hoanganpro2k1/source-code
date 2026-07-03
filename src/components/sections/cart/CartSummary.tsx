@@ -31,7 +31,7 @@ export const CartSummary = () => {
   return (
     <div className="flex flex-col gap-6 lg:sticky lg:top-28">
       {/* Coupon */}
-      <div className="flex flex-col gap-4 p-6 rounded-[24px] border border-border bg-card shadow-sm">
+      <div className="flex flex-col gap-4 p-6 rounded-sm border border-border bg-card shadow-sm">
         <h3 className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest flex items-center gap-2">
           <Ticket className="h-3 w-3" /> MÃ GIẢM GIÁ
         </h3>
@@ -39,16 +39,16 @@ export const CartSummary = () => {
           <input
             type="text"
             placeholder="Nhập mã..."
-            className="flex-1 h-10 bg-muted border border-border rounded-xl px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-background transition-all"
+            className="flex-1 h-10 bg-muted border border-border rounded-sm px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-background transition-all"
           />
-          <button className="px-6 h-10 rounded-xl bg-primary text-xs font-bold text-white hover:bg-primary/90 transition-colors">
+          <button className="px-6 h-10 rounded-sm bg-primary text-xs font-bold text-white hover:bg-primary/90 transition-colors">
             Áp dụng
           </button>
         </div>
       </div>
 
       {/* Order Summary */}
-      <div className="flex flex-col gap-6 p-8 rounded-[32px] border border-border bg-card shadow-xl">
+      <div className="flex flex-col gap-6 p-8 rounded-sm border border-border bg-card shadow-xl">
         <div className="flex flex-col gap-4">
           <h3 className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
             TỔNG ĐƠN HÀNG
@@ -88,7 +88,7 @@ export const CartSummary = () => {
             size="lg"
             disabled={allItems.length === 0}
             onClick={() => setDialogOpen(true)}
-            className="h-14 rounded-2xl text-base font-bold bg-primary shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all gap-3 w-full disabled:opacity-50 disabled:hover:scale-100"
+            className="h-14 rounded-sm text-base font-bold bg-primary shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all gap-3 w-full disabled:opacity-50 disabled:hover:scale-100"
           >
             <ShoppingCart className="h-5 w-5" /> Thanh toán tất cả •{" "}
             {formatCurrency(totalAmount)}
@@ -97,7 +97,7 @@ export const CartSummary = () => {
           <Link href="/login" className="w-full">
             <Button
               size="lg"
-              className="h-14 rounded-2xl text-base font-bold bg-primary shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all gap-3 w-full"
+              className="h-14 rounded-sm text-base font-bold bg-primary shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all gap-3 w-full"
             >
               <LogIn className="h-5 w-5" /> Đăng nhập để thanh toán
             </Button>

@@ -91,7 +91,7 @@ export const Testimonials = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group relative flex flex-col gap-4 rounded-[24px] border border-border bg-card p-6 transition-all hover:border-primary/30 hover:purple-glow"
+              className="group relative flex flex-col gap-4 rounded-sm border border-border bg-card p-6 transition-all hover:border-primary/30 hover:purple-glow"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">

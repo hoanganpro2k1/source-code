@@ -43,7 +43,7 @@ export const ReceiverInfoDialog = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 10 }}
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-md rounded-[32px] border border-border bg-card p-8 shadow-2xl flex flex-col gap-6"
+            className="w-full max-w-md rounded-sm border border-border bg-card p-8 shadow-2xl flex flex-col gap-6"
           >
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-black text-foreground">
@@ -51,7 +51,7 @@ export const ReceiverInfoDialog = ({
               </h3>
               <button
                 onClick={onClose}
-                className="h-8 w-8 flex items-center justify-center rounded-lg bg-muted text-muted-foreground hover:text-foreground transition-all"
+                className="h-8 w-8 flex items-center justify-center rounded-sm bg-muted text-muted-foreground hover:text-foreground transition-all"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -95,7 +95,7 @@ export const ReceiverInfoDialog = ({
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="h-12 rounded-2xl font-bold gap-2 mt-2"
+                className="h-12 rounded-sm font-bold gap-2 mt-2"
               >
                 {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
                 Tạo đơn hàng &amp; Thanh toán

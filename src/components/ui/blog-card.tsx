@@ -34,7 +34,7 @@ export const BlogCard = ({
       <motion.div
         whileHover={{ y: -8 }}
         className={cn(
-          "group flex flex-col h-full overflow-hidden rounded-[24px] border border-border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5",
+          "group flex flex-col h-full overflow-hidden rounded-sm border border-border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5",
           className
         )}
       >
@@ -49,7 +49,7 @@ export const BlogCard = ({
           />
           {/* Category Badge */}
           <div className="absolute left-4 top-4 z-10">
-            <span className="rounded-lg bg-primary/90 backdrop-blur-md px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white">
+            <span className="rounded-sm bg-primary/90 backdrop-blur-md px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white">
               {category}
             </span>
           </div>

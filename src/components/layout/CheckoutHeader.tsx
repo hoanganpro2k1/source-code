@@ -15,7 +15,7 @@ export function CheckoutHeader() {
             alt="Source Code Logo"
             width={36}
             height={36}
-            className="rounded-lg object-contain"
+            className="rounded-sm object-contain"
             style={{ width: "36px", height: "36px" }}
             priority
           />

@@ -63,7 +63,7 @@ export const RegisterForm = () => {
     <form className="flex flex-col gap-1" onSubmit={handleSubmit(onSubmit)}>
       {/* Họ và tên */}
       <div className="flex flex-col gap-1">
-        <InputGroup className="h-12 rounded-xl bg-white/5">
+        <InputGroup className="h-12 rounded-sm bg-white/5">
           <InputGroupAddon>
             <User />
           </InputGroupAddon>
@@ -76,7 +76,7 @@ export const RegisterForm = () => {
 
       {/* Số điện thoại */}
       <div className="flex flex-col gap-1">
-        <InputGroup className="h-12 rounded-xl bg-white/5">
+        <InputGroup className="h-12 rounded-sm bg-white/5">
           <InputGroupAddon>
             <Phone />
           </InputGroupAddon>
@@ -96,7 +96,7 @@ export const RegisterForm = () => {
 
       {/* Email */}
       <div className="flex flex-col gap-1">
-        <InputGroup className="h-12 rounded-xl bg-white/5">
+        <InputGroup className="h-12 rounded-sm bg-white/5">
           <InputGroupAddon>
             <Mail />
           </InputGroupAddon>
@@ -110,7 +110,7 @@ export const RegisterForm = () => {
       {/* Mã OTP */}
       <div className="flex flex-col gap-1">
         <div className="flex gap-2">
-          <InputGroup className="h-12 rounded-xl bg-white/5 flex-1">
+          <InputGroup className="h-12 rounded-sm bg-white/5 flex-1">
             <InputGroupAddon>
               <ShieldCheck />
             </InputGroupAddon>
@@ -127,7 +127,7 @@ export const RegisterForm = () => {
             type="button"
             onClick={handleSendOTP}
             disabled={otpLoading || countdown > 0}
-            className="h-12 px-4 rounded-xl border border-primary/40 bg-primary/10 text-primary text-sm font-semibold whitespace-nowrap hover:bg-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2 min-w-[120px] justify-center"
+            className="h-12 px-4 rounded-sm border border-primary/40 bg-primary/10 text-primary text-sm font-semibold whitespace-nowrap hover:bg-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2 min-w-[120px] justify-center"
           >
             {otpLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -169,7 +169,7 @@ export const RegisterForm = () => {
 
       {/* Mật khẩu */}
       <div className="flex flex-col gap-1">
-        <InputGroup className="h-12 rounded-xl bg-white/5">
+        <InputGroup className="h-12 rounded-sm bg-white/5">
           <InputGroupAddon>
             <Lock />
           </InputGroupAddon>
@@ -192,7 +192,7 @@ export const RegisterForm = () => {
 
       {/* Xác nhận mật khẩu */}
       <div className="flex flex-col gap-1">
-        <InputGroup className="h-12 rounded-xl bg-white/5">
+        <InputGroup className="h-12 rounded-sm bg-white/5">
           <InputGroupAddon>
             <Lock />
           </InputGroupAddon>
@@ -221,7 +221,7 @@ export const RegisterForm = () => {
           id="terms"
           checked={watch('terms')}
           onCheckedChange={(checked) => setValue('terms', Boolean(checked), { shouldValidate: true })}
-          className="rounded-[4px] border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-white"
+          className="rounded-sm border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-white"
         />
         <label htmlFor="terms" className="text-sm text-muted-foreground leading-relaxed cursor-pointer select-none">
           Tôi đồng ý với{' '}
@@ -243,7 +243,7 @@ export const RegisterForm = () => {
         type="submit"
         size="lg"
         disabled={isSubmitting}
-        className="h-12 rounded-xl text-base font-bold bg-primary shadow-lg shadow-primary/20 transition-all disabled:opacity-70"
+        className="h-12 rounded-sm text-base font-bold bg-primary shadow-lg shadow-primary/20 transition-all disabled:opacity-70"
       >
         {isSubmitting ? (
           <>

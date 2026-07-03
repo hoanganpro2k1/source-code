@@ -35,7 +35,7 @@ export const ProjectCard = ({
         data-agent="Đồ Án 24h"
         whileHover={{ y: -8, scale: 1.01 }}
         className={cn(
-          'group relative flex flex-col overflow-hidden rounded-[24px] border border-border bg-card p-3 transition-all duration-300 hover:border-primary/50 hover:purple-glow',
+          'group relative flex flex-col overflow-hidden rounded-sm border border-border bg-card p-3 transition-all duration-300 hover:border-primary/50 hover:purple-glow',
           className,
         )}
       >
@@ -43,7 +43,7 @@ export const ProjectCard = ({
         <div className="absolute left-6 top-6 z-10">
           <span
             className={cn(
-              'rounded-md px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-white',
+              'rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-white',
               isPaid ? 'bg-red-500' : 'bg-green-500',
             )}
           >
@@ -62,7 +62,7 @@ export const ProjectCard = ({
         </div>
 
         {/* Image Wrapper */}
-        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[20px]">
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm">
           <Image
             src={image}
             alt={title}
@@ -82,7 +82,7 @@ export const ProjectCard = ({
 
           <div className="flex items-center justify-between mt-1">
             <p className="text-lg font-extrabold text-primary">{price}</p>
-            <span className="text-[10px] font-medium text-muted-foreground bg-muted px-2 py-1 rounded">
+            <span className="text-[10px] font-medium text-muted-foreground bg-muted px-2 py-1 rounded-sm">
               Source Code
             </span>
           </div>
@@ -91,7 +91,7 @@ export const ProjectCard = ({
             {tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="rounded-md bg-muted px-2 py-1 text-[10px] font-medium text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary"
+                className="rounded-sm bg-muted px-2 py-1 text-[10px] font-medium text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary"
               >
                 {tag}
               </span>

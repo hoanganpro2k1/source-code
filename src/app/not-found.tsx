@@ -78,7 +78,7 @@ export default function NotFound() {
         >
           <Link
             href="/"
-            className="flex-1 flex items-center justify-center gap-2 h-12 rounded-[14px] text-sm font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5"
+            className="flex-1 flex items-center justify-center gap-2 h-12 rounded-sm text-sm font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5"
             style={{
               background: 'linear-gradient(135deg, #6D4AFF 0%, #8B5CFF 100%)',
               boxShadow: '0 8px 24px rgba(124, 77, 255, 0.3)',
@@ -90,7 +90,7 @@ export default function NotFound() {
 
           <button
             onClick={() => router.back()}
-            className="flex-1 flex items-center justify-center gap-2 h-12 rounded-[14px] text-sm font-semibold text-foreground/80 border border-border bg-white/5 hover:bg-white/10 hover:border-primary/40 transition-all duration-300 hover:-translate-y-0.5"
+            className="flex-1 flex items-center justify-center gap-2 h-12 rounded-sm text-sm font-semibold text-foreground/80 border border-border bg-white/5 hover:bg-white/10 hover:border-primary/40 transition-all duration-300 hover:-translate-y-0.5"
           >
             <ArrowLeft className="h-4 w-4" />
             Quay lại

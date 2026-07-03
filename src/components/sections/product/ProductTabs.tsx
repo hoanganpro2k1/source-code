@@ -76,7 +76,7 @@ export const ProductTabs = () => {
         )}
         
         {activeTab !== "Tính năng" && (
-          <div className="flex items-center justify-center h-64 text-muted-foreground italic border-2 border-dashed border-border rounded-[32px]">
+          <div className="flex items-center justify-center h-64 text-muted-foreground italic border-2 border-dashed border-border rounded-sm">
             Nội dung đang được cập nhật...
           </div>
         )}

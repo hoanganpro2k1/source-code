@@ -74,7 +74,7 @@ export function Header({ initialAccessToken }: { initialAccessToken?: string }) 
               alt="Source Code Logo"
               width={36}
               height={36}
-              className="rounded-lg object-contain"
+              className="rounded-sm object-contain"
               style={{ width: '36px', height: '36px' }}
               priority
             />
@@ -166,7 +166,7 @@ export function Header({ initialAccessToken }: { initialAccessToken?: string }) 
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   align="end"
-                  className="w-[280px] rounded-[24px] border border-border bg-card/95 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl z-[100]"
+                  className="w-[280px] rounded-sm border border-border bg-card/95 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl z-[100]"
                   data-agent="Đồ Án 24h"
                 >
                   {/* User Info Header */}
@@ -184,7 +184,7 @@ export function Header({ initialAccessToken }: { initialAccessToken?: string }) 
                     <DropdownMenuItem asChild>
                       <Link
                         href="/profile"
-                        className="flex items-center gap-3 px-3 py-2.5 rounded-[14px] text-sm font-medium text-foreground/80 hover:bg-muted dark:hover:bg-white/5 hover:text-foreground transition-all duration-200 cursor-pointer"
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-sm text-sm font-medium text-foreground/80 hover:bg-muted dark:hover:bg-white/5 hover:text-foreground transition-all duration-200 cursor-pointer"
                       >
                         <User className="h-4 w-4 text-muted-foreground" />
                         <span>Hồ sơ</span>
@@ -193,7 +193,7 @@ export function Header({ initialAccessToken }: { initialAccessToken?: string }) 
                     <DropdownMenuItem asChild>
                       <Link
                         href="/download-history"
-                        className="flex items-center gap-3 px-3 py-2.5 rounded-[14px] text-sm font-medium text-foreground/80 hover:bg-muted dark:hover:bg-white/5 hover:text-foreground transition-all duration-200 cursor-pointer"
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-sm text-sm font-medium text-foreground/80 hover:bg-muted dark:hover:bg-white/5 hover:text-foreground transition-all duration-200 cursor-pointer"
                       >
                         <Package className="h-4 w-4 text-muted-foreground" />
                         <span>Lịch sử tải code</span>
@@ -208,7 +208,7 @@ export function Header({ initialAccessToken }: { initialAccessToken?: string }) 
                       variant="ghost"
                       onClick={handleLogout}
                       disabled={isLoggingOut}
-                      className="w-full justify-start gap-3 px-3 py-2.5 h-auto rounded-[14px] text-sm font-medium text-destructive hover:bg-destructive/10 hover:text-destructive transition-all duration-200 disabled:opacity-60"
+                      className="w-full justify-start gap-3 px-3 py-2.5 h-auto rounded-sm text-sm font-medium text-destructive hover:bg-destructive/10 hover:text-destructive transition-all duration-200 disabled:opacity-60"
                     >
                       <LogOut className="h-4 w-4" />
                       <span>{isLoggingOut ? 'Đang đăng xuất...' : 'Đăng xuất'}</span>
@@ -228,7 +228,7 @@ export function Header({ initialAccessToken }: { initialAccessToken?: string }) 
               </Button>
               <Button
                 asChild
-                className="hidden sm:inline-flex bg-primary hover:bg-primary/90 text-white rounded-[14px] px-5"
+                className="hidden sm:inline-flex bg-primary hover:bg-primary/90 text-white rounded-sm px-5"
               >
                 <Link href="/login">Đăng nhập</Link>
               </Button>

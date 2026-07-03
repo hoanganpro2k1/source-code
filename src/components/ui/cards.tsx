@@ -15,11 +15,11 @@ export const StatsCard = ({ icon, value, label, className }: StatsCardProps) => 
   return (
     <div
       className={cn(
-        "flex items-center gap-4 rounded-[24px] border border-border bg-card/50 p-6 backdrop-blur-sm",
+        "flex items-center gap-4 rounded-sm border border-border bg-card/50 p-6 backdrop-blur-sm",
         className
       )}
     >
-      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-muted text-primary">
+      <div className="flex h-12 w-12 items-center justify-center rounded-sm bg-muted text-primary">
         {icon}
       </div>
       <div className="flex flex-col">
@@ -42,11 +42,11 @@ export const CategoryCard = ({ icon, title, count, className }: CategoryCardProp
     <motion.div
       whileHover={{ scale: 1.05, y: -5 }}
       className={cn(
-        "flex cursor-pointer items-center gap-4 rounded-[24px] border border-border bg-card p-5 transition-all hover:border-primary/30 hover:bg-[#161C33]",
+        "flex cursor-pointer items-center gap-4 rounded-sm border border-border bg-card p-5 transition-all hover:border-primary/30 hover:bg-[#161C33]",
         className
       )}
     >
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+      <div className="flex h-10 w-10 items-center justify-center rounded-sm bg-primary/10 text-primary">
         {icon}
       </div>
       <div className="flex flex-col">

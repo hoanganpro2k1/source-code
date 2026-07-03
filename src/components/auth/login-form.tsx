@@ -23,7 +23,7 @@ export const LoginForm = () => {
     <div className="flex flex-col gap-1">
       <form onSubmit={onSubmit} className="space-y-1">
         {/* Email */}
-        <InputGroup className="h-12 rounded-xl bg-white/5">
+        <InputGroup className="h-12 rounded-sm bg-white/5">
           <InputGroupAddon>
             <Mail />
           </InputGroupAddon>
@@ -34,7 +34,7 @@ export const LoginForm = () => {
         </div>
 
         {/* Mật khẩu */}
-        <InputGroup className="h-12 rounded-xl bg-white/5">
+        <InputGroup className="h-12 rounded-sm bg-white/5">
           <InputGroupAddon>
             <Lock />
           </InputGroupAddon>

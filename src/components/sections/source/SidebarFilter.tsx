@@ -38,7 +38,7 @@ export const SidebarFilter = () => {
             <button
               key={cat.name}
               className={cn(
-                "flex items-center justify-between px-3 py-2 rounded-xl text-sm transition-all",
+                "flex items-center justify-between px-3 py-2 rounded-sm text-sm transition-all",
                 i === 0 
                   ? "bg-primary/10 text-primary font-bold" 
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -57,7 +57,7 @@ export const SidebarFilter = () => {
         <div className="flex flex-col gap-3 px-3">
           {TECHNOLOGIES.map((tech) => (
             <div key={tech} className="flex items-center gap-3">
-              <Checkbox id={`tech-${tech}`} className="rounded-md border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary" />
+              <Checkbox id={`tech-${tech}`} className="rounded-sm border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary" />
               <label 
                 htmlFor={`tech-${tech}`} 
                 className="text-sm text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
@@ -78,7 +78,7 @@ export const SidebarFilter = () => {
         <div className="flex flex-col gap-3 px-3">
           {PRICE_RANGES.map((range) => (
             <div key={range} className="flex items-center gap-3">
-              <Checkbox id={`price-${range}`} className="rounded-md border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary" />
+              <Checkbox id={`price-${range}`} className="rounded-sm border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary" />
               <label 
                 htmlFor={`price-${range}`} 
                 className="text-sm text-muted-foreground cursor-pointer hover:text-foreground transition-colors"

@@ -31,10 +31,10 @@ const CartItemRow = ({ item, delay }: { item: CartItem; delay: number }) => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay }}
-      className="flex flex-col gap-4 p-6 rounded-3xl border border-border bg-card group hover:shadow-xl transition-all"
+      className="flex flex-col gap-4 p-6 rounded-sm border border-border bg-card group hover:shadow-xl transition-all"
     >
       <div className="flex items-start gap-4">
-        <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-xl border border-border">
+        <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-sm border border-border">
           <Image
             src={item.sku.image || item.sku.product.images?.[0] || "/placeholder.png"}
             alt={item.sku.product.name}
@@ -54,7 +54,7 @@ const CartItemRow = ({ item, delay }: { item: CartItem; delay: number }) => {
           <button
             onClick={() => removeCartItems.mutate([item.id])}
             disabled={isMutating}
-            className="absolute right-0 top-0 h-8 w-8 flex items-center justify-center rounded-lg bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition-all border border-red-100 disabled:opacity-50"
+            className="absolute right-0 top-0 h-8 w-8 flex items-center justify-center rounded-sm bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition-all border border-red-100 disabled:opacity-50"
           >
             <Trash2 className="h-4 w-4" />
           </button>
@@ -62,11 +62,11 @@ const CartItemRow = ({ item, delay }: { item: CartItem; delay: number }) => {
       </div>
 
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 p-1 rounded-xl bg-muted/30 border border-border/50">
+        <div className="flex items-center gap-2 p-1 rounded-sm bg-muted/30 border border-border/50">
           <button
             onClick={() => handleChangeQuantity(item.quantity - 1)}
             disabled={isMutating}
-            className="h-7 w-7 flex items-center justify-center rounded-lg bg-background text-muted-foreground hover:text-primary transition-all disabled:opacity-50"
+            className="h-7 w-7 flex items-center justify-center rounded-sm bg-background text-muted-foreground hover:text-primary transition-all disabled:opacity-50"
           >
             <Minus className="h-3.5 w-3.5" />
           </button>
@@ -76,7 +76,7 @@ const CartItemRow = ({ item, delay }: { item: CartItem; delay: number }) => {
           <button
             onClick={() => handleChangeQuantity(item.quantity + 1)}
             disabled={isMutating || item.quantity >= item.sku.stock}
-            className="h-7 w-7 flex items-center justify-center rounded-lg bg-background text-muted-foreground hover:text-primary transition-all disabled:opacity-50"
+            className="h-7 w-7 flex items-center justify-center rounded-sm bg-background text-muted-foreground hover:text-primary transition-all disabled:opacity-50"
           >
             <Plus className="h-3.5 w-3.5" />
           </button>
@@ -113,7 +113,7 @@ export const CartList = () => {
 
   if (groups.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 text-center gap-2 border border-dashed border-border rounded-3xl">
+      <div className="flex flex-col items-center justify-center py-24 text-center gap-2 border border-dashed border-border rounded-sm">
         <p className="text-foreground font-bold">Giỏ hàng của bạn đang trống</p>
         <p className="text-sm text-muted-foreground">
           Hãy khám phá kho source code chất lượng của chúng tôi.

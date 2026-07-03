@@ -31,7 +31,7 @@ export default function CartPage() {
               <ChevronLeft className="h-5 w-5" />
             </Link>
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-white shadow-lg shadow-primary/20">
+              <div className="flex h-12 w-12 items-center justify-center rounded-sm bg-primary text-white shadow-lg shadow-primary/20">
                 <ShoppingBag className="h-6 w-6" />
               </div>
               <div className="flex flex-col">
@@ -48,7 +48,7 @@ export default function CartPage() {
           <button
             onClick={handleClearAll}
             disabled={allItems.length === 0 || removeCartItems.isPending}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-50 text-red-500 text-xs font-bold border border-red-100 hover:bg-red-500 hover:text-white transition-all disabled:opacity-50"
+            className="flex items-center gap-2 px-4 py-2 rounded-sm bg-red-50 text-red-500 text-xs font-bold border border-red-100 hover:bg-red-500 hover:text-white transition-all disabled:opacity-50"
           >
             <Trash2 className="h-4 w-4" /> Xóa tất cả
           </button>
@@ -60,7 +60,7 @@ export default function CartPage() {
             <CartList />
 
             {/* Continue Shopping */}
-            <div className="mt-12 flex items-center justify-between p-8 rounded-[32px] border border-dashed border-border">
+            <div className="mt-12 flex items-center justify-between p-8 rounded-sm border border-dashed border-border">
               <div className="flex flex-col gap-1">
                 <h4 className="font-bold text-foreground">
                   Tiếp tục tìm kiếm?
@@ -70,7 +70,7 @@ export default function CartPage() {
                 </p>
               </div>
               <Link href="/source">
-                <button className="px-6 py-3 rounded-2xl bg-muted text-sm font-bold text-foreground hover:bg-primary hover:text-white transition-all">
+                <button className="px-6 py-3 rounded-sm bg-muted text-sm font-bold text-foreground hover:bg-primary hover:text-white transition-all">
                   Xem thêm sản phẩm
                 </button>
               </Link>
