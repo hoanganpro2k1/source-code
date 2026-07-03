@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useOrderPaymentStatus } from "@/hooks/use-order-payment-status";
 import { formatCurrency } from "@/lib/utils";
-import { BANK_INFO, PAYMENT_CODE_PREFIX } from "@/lib/payment-constants";
+import { BANK_INFO, buildPaymentContent } from "@/lib/payment-constants";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -73,11 +73,11 @@ function CheckoutContent() {
     (sum, item) => sum + item.skuPrice * item.quantity,
     0,
   );
-  const paymentContent = `${PAYMENT_CODE_PREFIX}${paymentId}`;
+  const paymentContent = buildPaymentContent(paymentId);
   const isPaid = order.status !== "PENDING_PAYMENT" && order.status !== "CANCELLED";
   const isCancelled = order.status === "CANCELLED";
 
-  const qrUrl = `https://qr.sepay.vn/img?acc=${BANK_INFO.accountNumber}&bank=${BANK_INFO.bankName.replace(" ", "")}&amount=${totalAmount}&des=${paymentContent}`;
+  const qrUrl = `https://qr.sepay.vn/img?acc=${BANK_INFO.accountNumber}&bank=${BANK_INFO.bankName.replace(" ", "")}&amount=${totalAmount}&des=${encodeURIComponent(paymentContent)}`;
 
   return (
     <div className="min-h-screen bg-background py-12">
