@@ -3,19 +3,22 @@ import { authService } from "@/services/auth.service";
 import { useAuthStore } from "@/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { decodeJwt } from "@/lib/jwt";
 import { parseApiError } from "@/lib/api-error";
+import { getSafeCallbackUrl } from "@/lib/utils";
 
 // Key lưu thông tin tạm trong sessionStorage để truyền qua trang verify
 export const LOGIN_SESSION_KEY = "login_pending_2fa";
 
 export const useLoginForm = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const setAuth = useAuthStore((state) => state.setAuth);
+  const callbackUrl = getSafeCallbackUrl(searchParams.get("callbackUrl"));
 
   const form = useForm<LoginStep1Type>({
     resolver: zodResolver(LoginStep1Schema),
@@ -32,6 +35,7 @@ export const useLoginForm = () => {
           JSON.stringify({
             email: form.getValues("email"),
             password: form.getValues("password"),
+            callbackUrl,
           }),
         );
         router.push("/login/verify");
@@ -57,7 +61,9 @@ export const useLoginForm = () => {
       setAuth(accessToken, user);
       toast.success("Đăng nhập thành công!");
 
-      if (user?.role === "ADMIN") {
+      if (callbackUrl) {
+        router.push(callbackUrl);
+      } else if (user?.role === "ADMIN") {
         router.push("/admin/dashboard");
       } else {
         router.push("/source");

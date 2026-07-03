@@ -22,12 +22,12 @@ export const useVerifyForm = () => {
   const [resendCountdown, setResendCountdown] = useState(0);
 
   // Đọc sessionStorage 1 lần khi khởi tạo (lazy initializer — không gây cascading render)
-  const [pendingSession] = useState<{ email: string; password: string } | null>(() => {
+  const [pendingSession] = useState<{ email: string; password: string; callbackUrl?: string | null } | null>(() => {
     if (typeof window === "undefined") return null; // SSR safety
     try {
       const raw = sessionStorage.getItem(LOGIN_SESSION_KEY);
       if (!raw) return null;
-      const parsed = JSON.parse(raw) as { email: string; password: string };
+      const parsed = JSON.parse(raw) as { email: string; password: string; callbackUrl?: string | null };
       return parsed.email && parsed.password ? parsed : null;
     } catch {
       return null;
@@ -104,7 +104,9 @@ export const useVerifyForm = () => {
       setAuth(accessToken, user);
       toast.success("Đăng nhập thành công!");
 
-      if (user?.role === "ADMIN") {
+      if (pendingSession?.callbackUrl) {
+        router.push(pendingSession.callbackUrl);
+      } else if (user?.role === "ADMIN") {
         router.push("/admin/dashboard");
       } else {
         router.push("/source");
