@@ -1,6 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useOrderPaymentStatus } from "@/hooks/use-order-payment-status";
+import { formatCurrency } from "@/lib/utils";
+import { BANK_INFO, PAYMENT_CODE_PREFIX } from "@/lib/payment-constants";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -10,24 +13,21 @@ import {
   Copy,
   Loader2,
   ShieldCheck,
+  XCircle,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
 
-export default function CheckoutPage() {
+function CheckoutContent() {
+  const searchParams = useSearchParams();
   const [copied, setCopied] = useState<string | null>(null);
-  const [paymentStatus, setPaymentStatus] = useState<"waiting" | "success">(
-    "waiting",
-  );
 
-  const bankInfo = {
-    bankName: "Vietinbank",
-    accountName: "BUI HOANG AN",
-    accountNumber: "100876668851",
-    amount: "2,000",
-    description: "SEVQR CODE789", // Mandatory prefix for VietinBank
-  };
+  const orderId = Number(searchParams.get("orderId"));
+  const paymentId = searchParams.get("paymentId") ?? "";
+
+  const { data: order, isLoading, isError } = useOrderPaymentStatus(orderId);
 
   const handleCopy = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
@@ -35,30 +35,49 @@ export default function CheckoutPage() {
     setTimeout(() => setCopied(null), 2000);
   };
 
-  // Poll for payment success
-  useEffect(() => {
-    if (paymentStatus === "success") return;
+  if (!orderId || !paymentId) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-4 text-center px-6">
+        <p className="text-foreground font-bold">
+          Không tìm thấy thông tin đơn hàng để thanh toán.
+        </p>
+        <Link href="/cart">
+          <Button className="rounded-2xl">Quay lại giỏ hàng</Button>
+        </Link>
+      </div>
+    );
+  }
 
-    const checkPayment = async () => {
-      try {
-        const res = await fetch(
-          `/api/payments/check?orderId=${bankInfo.description}`,
-        );
-        const data = await res.json();
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center gap-2 text-muted-foreground">
+        <Loader2 className="h-5 w-5 animate-spin" /> Đang tải đơn hàng...
+      </div>
+    );
+  }
 
-        if (data.paid) {
-          setPaymentStatus("success");
-        }
-      } catch (error) {
-        console.error("Error checking payment:", error);
-      }
-    };
+  if (isError || !order) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-4 text-center px-6">
+        <p className="text-foreground font-bold">
+          Không thể tải thông tin đơn hàng.
+        </p>
+        <Link href="/cart">
+          <Button className="rounded-2xl">Quay lại giỏ hàng</Button>
+        </Link>
+      </div>
+    );
+  }
 
-    const interval = setInterval(checkPayment, 3000); // Check every 3 seconds
-    return () => clearInterval(interval);
-  }, [paymentStatus, bankInfo.description]);
+  const totalAmount = order.items.reduce(
+    (sum, item) => sum + item.skuPrice * item.quantity,
+    0,
+  );
+  const paymentContent = `${PAYMENT_CODE_PREFIX}${paymentId}`;
+  const isPaid = order.status !== "PENDING_PAYMENT" && order.status !== "CANCELLED";
+  const isCancelled = order.status === "CANCELLED";
 
-  const qrUrl = `https://qr.sepay.vn/img?acc=${bankInfo.accountNumber}&bank=${bankInfo.bankName.replace(" ", "")}&amount=2000&des=${bankInfo.description}`;
+  const qrUrl = `https://qr.sepay.vn/img?acc=${BANK_INFO.accountNumber}&bank=${BANK_INFO.bankName.replace(" ", "")}&amount=${totalAmount}&des=${paymentContent}`;
 
   return (
     <div className="min-h-screen bg-background py-12">
@@ -83,7 +102,7 @@ export default function CheckoutPage() {
             animate={{ opacity: 1, x: 0 }}
             className="flex flex-col gap-6 p-8 rounded-[40px] border border-border bg-card shadow-2xl items-center text-center relative overflow-hidden"
           >
-            {paymentStatus === "success" && (
+            {isPaid && (
               <div className="absolute inset-0 z-20 bg-primary/95 backdrop-blur-sm flex flex-col items-center justify-center text-white p-8">
                 <motion.div
                   initial={{ scale: 0 }}
@@ -102,6 +121,20 @@ export default function CheckoutPage() {
                 <Link href="/source" className="w-full">
                   <Button className="w-full h-14 bg-white text-primary hover:bg-white/90 font-bold rounded-2xl gap-2">
                     Truy cập kho sản phẩm <ArrowRight className="h-5 w-5" />
+                  </Button>
+                </Link>
+              </div>
+            )}
+
+            {isCancelled && (
+              <div className="absolute inset-0 z-20 bg-red-500/95 backdrop-blur-sm flex flex-col items-center justify-center text-white p-8">
+                <div className="h-20 w-20 bg-white rounded-full flex items-center justify-center text-red-500 mb-6">
+                  <XCircle className="h-10 w-10" />
+                </div>
+                <h2 className="text-3xl font-black mb-2">Đơn hàng đã bị hủy</h2>
+                <Link href="/cart" className="w-full">
+                  <Button className="w-full h-14 bg-white text-red-500 hover:bg-white/90 font-bold rounded-2xl">
+                    Quay lại giỏ hàng
                   </Button>
                 </Link>
               </div>
@@ -135,7 +168,7 @@ export default function CheckoutPage() {
 
             <div className="flex items-center gap-2 text-[10px] text-muted-foreground italic">
               <Clock className="h-3 w-3" />
-              <span>Mã QR sẽ hết hạn sau 15:00</span>
+              <span>Hệ thống tự động kiểm tra giao dịch mỗi 3 giây</span>
             </div>
           </motion.div>
 
@@ -152,21 +185,21 @@ export default function CheckoutPage() {
 
               <div className="flex flex-col gap-5">
                 {[
-                  { label: "Ngân hàng", value: bankInfo.bankName },
-                  { label: "Chủ tài khoản", value: bankInfo.accountName },
+                  { label: "Ngân hàng", value: BANK_INFO.bankName },
+                  { label: "Chủ tài khoản", value: BANK_INFO.accountName },
                   {
                     label: "Số tài khoản",
-                    value: bankInfo.accountNumber,
+                    value: BANK_INFO.accountNumber,
                     copyable: true,
                   },
                   {
                     label: "Số tiền",
-                    value: bankInfo.amount + "đ",
+                    value: formatCurrency(totalAmount),
                     highlight: true,
                   },
                   {
                     label: "Nội dung",
-                    value: bankInfo.description,
+                    value: paymentContent,
                     copyable: true,
                     highlight: true,
                   },
@@ -221,5 +254,19 @@ export default function CheckoutPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-background flex items-center justify-center">
+          <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+        </div>
+      }
+    >
+      <CheckoutContent />
+    </Suspense>
   );
 }

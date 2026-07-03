@@ -1,10 +1,33 @@
 "use client";
 
+import { ReceiverInfoDialog } from "@/components/sections/cart/ReceiverInfoDialog";
 import { Button } from "@/components/ui/button";
-import { ShieldCheck, ShoppingCart, Ticket } from "lucide-react";
+import { useCart } from "@/hooks/use-cart";
+import { useCheckout } from "@/hooks/use-checkout";
+import { formatCurrency } from "@/lib/utils";
+import { useAuthStore } from "@/store";
+import { LogIn, ShieldCheck, ShoppingCart, Ticket } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 export const CartSummary = () => {
+  const accessToken = useAuthStore((state) => state.accessToken);
+  const { data } = useCart();
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const groups = data?.data ?? [];
+  const allItems = groups.flatMap((group) => group.cartItems);
+  const totalAmount = allItems.reduce(
+    (sum, item) => sum + item.sku.price * item.quantity,
+    0,
+  );
+
+  const { form, isSubmitting, onSubmit } = useCheckout(groups);
+
+  const handleSubmit = () => {
+    onSubmit();
+  };
+
   return (
     <div className="flex flex-col gap-6 lg:sticky lg:top-28">
       {/* Coupon */}
@@ -32,40 +55,68 @@ export const CartSummary = () => {
           </h3>
 
           <div className="flex flex-col gap-3">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground line-clamp-1 flex-1">
-                Đồ Án Website Bán Ô TÔ | Reac...
+            {allItems.length === 0 && (
+              <span className="text-sm text-muted-foreground">
+                Chưa có sản phẩm nào trong giỏ hàng.
               </span>
-              <span className="font-bold text-foreground">299.000đ</span>
-            </div>
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground line-clamp-1 flex-1">
-                Đồ Án Website Bán Kính | React...
-              </span>
-              <span className="font-bold text-foreground">299.000đ</span>
-            </div>
+            )}
+            {allItems.map((item) => (
+              <div
+                key={item.id}
+                className="flex items-center justify-between text-sm"
+              >
+                <span className="text-muted-foreground line-clamp-1 flex-1">
+                  {item.sku.product.name}
+                </span>
+                <span className="font-bold text-foreground">
+                  {formatCurrency(item.sku.price * item.quantity)}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
         <div className="flex items-center justify-between text-lg pt-6 border-t border-border/50">
           <span className="font-bold text-foreground">Tổng thanh toán</span>
-          <span className="font-black text-primary">2.000đ</span>
+          <span className="font-black text-primary">
+            {formatCurrency(totalAmount)}
+          </span>
         </div>
 
-        <Link href="/checkout" className="w-full">
+        {accessToken ? (
           <Button
             size="lg"
-            className="h-14 rounded-2xl text-base font-bold bg-primary shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all gap-3 w-full"
+            disabled={allItems.length === 0}
+            onClick={() => setDialogOpen(true)}
+            className="h-14 rounded-2xl text-base font-bold bg-primary shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all gap-3 w-full disabled:opacity-50 disabled:hover:scale-100"
           >
-            <ShoppingCart className="h-5 w-5" /> Thanh toán tất cả • 2.000đ
+            <ShoppingCart className="h-5 w-5" /> Thanh toán tất cả •{" "}
+            {formatCurrency(totalAmount)}
           </Button>
-        </Link>
+        ) : (
+          <Link href="/login" className="w-full">
+            <Button
+              size="lg"
+              className="h-14 rounded-2xl text-base font-bold bg-primary shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all gap-3 w-full"
+            >
+              <LogIn className="h-5 w-5" /> Đăng nhập để thanh toán
+            </Button>
+          </Link>
+        )}
 
         <div className="flex items-center justify-center gap-2 text-[10px] text-muted-foreground font-medium">
           <ShieldCheck className="h-3 w-3 text-orange-400" />
           <span>Thanh toán bảo mật qua SePay</span>
         </div>
       </div>
+
+      <ReceiverInfoDialog
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        form={form}
+        onSubmit={handleSubmit}
+        isSubmitting={isSubmitting}
+      />
     </div>
   );
 };

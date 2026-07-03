@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "qr.sepay.vn",
       },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "3001",
+      },
     ],
   },
 };

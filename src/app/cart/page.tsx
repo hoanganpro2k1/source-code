@@ -2,10 +2,22 @@
 
 import { CartList } from "@/components/sections/cart/CartList";
 import { CartSummary } from "@/components/sections/cart/CartSummary";
+import { useCart, useRemoveCartItems } from "@/hooks/use-cart";
 import { ChevronLeft, ShoppingBag, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 export default function CartPage() {
+  const { data } = useCart();
+  const removeCartItems = useRemoveCartItems();
+
+  const groups = data?.data ?? [];
+  const allItems = groups.flatMap((group) => group.cartItems);
+
+  const handleClearAll = () => {
+    if (allItems.length === 0) return;
+    removeCartItems.mutate(allItems.map((item) => item.id));
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-12">
@@ -27,13 +39,17 @@ export default function CartPage() {
                   Giỏ hàng
                 </h1>
                 <span className="text-xs text-muted-foreground font-medium mt-1">
-                  2 sản phẩm
+                  {allItems.length} sản phẩm
                 </span>
               </div>
             </div>
           </div>
 
-          <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-50 text-red-500 text-xs font-bold border border-red-100 hover:bg-red-500 hover:text-white transition-all">
+          <button
+            onClick={handleClearAll}
+            disabled={allItems.length === 0 || removeCartItems.isPending}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-50 text-red-500 text-xs font-bold border border-red-100 hover:bg-red-500 hover:text-white transition-all disabled:opacity-50"
+          >
             <Trash2 className="h-4 w-4" /> Xóa tất cả
           </button>
         </div>

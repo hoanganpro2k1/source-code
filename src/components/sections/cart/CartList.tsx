@@ -1,102 +1,139 @@
 "use client";
 
+import { useCart, useRemoveCartItems, useUpdateCartItem } from "@/hooks/use-cart";
+import { formatCurrency } from "@/lib/utils";
+import type { CartItem } from "@/types/cart";
 import { motion } from "framer-motion";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Loader2, Minus, Plus, Store, Trash2 } from "lucide-react";
 import Image from "next/image";
 
-const CART_ITEMS = [
-  {
-    id: 1,
-    title: "Web Quản Lý Bán Hàng | ReactJS - NodeJS - MySQL",
-    price: 800000,
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop",
-    category: "Web App",
-  },
-  {
-    id: 2,
-    title: "Ứng Dụng Đặt Phòng Khách Sạn | React Native",
-    price: 600000,
-    image:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1000&auto=format&fit=crop",
-    category: "Mobile App",
-  },
-];
+const CartItemRow = ({ item, delay }: { item: CartItem; delay: number }) => {
+  const updateCartItem = useUpdateCartItem();
+  const removeCartItems = useRemoveCartItems();
+
+  const isMutating = updateCartItem.isPending || removeCartItems.isPending;
+
+  const handleChangeQuantity = (nextQuantity: number) => {
+    if (isMutating) return;
+    if (nextQuantity < 1) {
+      removeCartItems.mutate([item.id]);
+      return;
+    }
+    updateCartItem.mutate({
+      cartItemId: item.id,
+      skuId: item.skuId,
+      quantity: nextQuantity,
+    });
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay }}
+      className="flex flex-col gap-4 p-6 rounded-3xl border border-border bg-card group hover:shadow-xl transition-all"
+    >
+      <div className="flex items-start gap-4">
+        <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-xl border border-border">
+          <Image
+            src={item.sku.image || item.sku.product.images?.[0] || "/placeholder.png"}
+            alt={item.sku.product.name}
+            fill
+            sizes="80px"
+            className="object-cover"
+          />
+        </div>
+
+        <div className="flex-1 flex flex-col gap-1 pr-10 relative">
+          <h3 className="font-bold text-foreground leading-tight group-hover:text-primary transition-colors text-sm md:text-base line-clamp-2">
+            {item.sku.product.name}
+          </h3>
+          {item.sku.value && (
+            <span className="text-xs text-muted-foreground">{item.sku.value}</span>
+          )}
+          <button
+            onClick={() => removeCartItems.mutate([item.id])}
+            disabled={isMutating}
+            className="absolute right-0 top-0 h-8 w-8 flex items-center justify-center rounded-lg bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition-all border border-red-100 disabled:opacity-50"
+          >
+            <Trash2 className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2 p-1 rounded-xl bg-muted/30 border border-border/50">
+          <button
+            onClick={() => handleChangeQuantity(item.quantity - 1)}
+            disabled={isMutating}
+            className="h-7 w-7 flex items-center justify-center rounded-lg bg-background text-muted-foreground hover:text-primary transition-all disabled:opacity-50"
+          >
+            <Minus className="h-3.5 w-3.5" />
+          </button>
+          <span className="w-6 text-center text-sm font-bold text-foreground">
+            {item.quantity}
+          </span>
+          <button
+            onClick={() => handleChangeQuantity(item.quantity + 1)}
+            disabled={isMutating || item.quantity >= item.sku.stock}
+            className="h-7 w-7 flex items-center justify-center rounded-lg bg-background text-muted-foreground hover:text-primary transition-all disabled:opacity-50"
+          >
+            <Plus className="h-3.5 w-3.5" />
+          </button>
+        </div>
+
+        <span className="text-lg font-black text-primary">
+          {formatCurrency(item.sku.price * item.quantity)}
+        </span>
+      </div>
+    </motion.div>
+  );
+};
 
 export const CartList = () => {
-  return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-4">
-        {CART_ITEMS.map((item, i) => (
-          <motion.div
-            key={item.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            className="flex flex-col gap-4 p-6 rounded-3xl border border-border bg-card group hover:shadow-xl transition-all"
-          >
-            <div className="flex items-start gap-4">
-              {/* Image */}
-              <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-xl border border-border">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  sizes="80px"
-                  className="object-cover"
-                />
-              </div>
+  const { data, isLoading, isError } = useCart();
 
-              {/* Info */}
-              <div className="flex-1 flex flex-col gap-1 pr-10 relative">
-                <h3 className="font-bold text-foreground leading-tight group-hover:text-primary transition-colors text-sm md:text-base">
-                  {item.title}
-                </h3>
-                {/* Remove Icon */}
-                <button className="absolute right-0 top-0 h-8 w-8 flex items-center justify-center rounded-lg bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition-all border border-red-100">
-                  <Trash2 className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-
-            {/* Service Rows */}
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center justify-between p-3 rounded-xl bg-primary/5 border border-primary/10">
-                <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-white">
-                    <Plus className="h-4 w-4" />
-                  </div>
-                  <span className="text-sm font-bold text-primary">
-                    Source Code
-                  </span>
-                </div>
-                <span className="text-sm font-black text-primary">
-                  299.000đ
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between p-3 rounded-xl bg-muted/30 border border-border/50">
-                <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-lg bg-muted flex items-center justify-center text-muted-foreground">
-                    <Minus className="h-4 w-4" />
-                  </div>
-                  <span className="text-sm font-bold text-muted-foreground">
-                    Hỗ trợ cài đặt
-                  </span>
-                </div>
-                <span className="text-sm font-black text-muted-foreground">
-                  +0đ
-                </span>
-              </div>
-            </div>
-
-            {/* Item Total */}
-            <div className="flex justify-end mt-2">
-              <span className="text-lg font-black text-primary">299.000đ</span>
-            </div>
-          </motion.div>
-        ))}
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-24 text-muted-foreground gap-2">
+        <Loader2 className="h-5 w-5 animate-spin" /> Đang tải giỏ hàng...
       </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="flex items-center justify-center py-24 text-red-500 text-sm font-medium">
+        Không thể tải giỏ hàng. Vui lòng thử lại.
+      </div>
+    );
+  }
+
+  const groups = data?.data ?? [];
+
+  if (groups.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-24 text-center gap-2 border border-dashed border-border rounded-3xl">
+        <p className="text-foreground font-bold">Giỏ hàng của bạn đang trống</p>
+        <p className="text-sm text-muted-foreground">
+          Hãy khám phá kho source code chất lượng của chúng tôi.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-8">
+      {groups.map((group) => (
+        <div key={group.shop.id} className="flex flex-col gap-4">
+          <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-widest">
+            <Store className="h-3.5 w-3.5" /> {group.shop.name}
+          </div>
+          {group.cartItems.map((item, i) => (
+            <CartItemRow key={item.id} item={item} delay={i * 0.05} />
+          ))}
+        </div>
+      ))}
     </div>
   );
 };
