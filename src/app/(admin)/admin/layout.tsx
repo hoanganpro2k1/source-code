@@ -11,7 +11,6 @@ import {
   MessageSquareIcon,
   MessageCircleIcon,
   Settings2Icon,
-  CommandIcon,
   ChevronLeft,
   Bell,
   User,
@@ -21,6 +20,7 @@ import {
   KeyRound,
   ShieldCheck,
 } from 'lucide-react';
+import Image from 'next/image';
 
 import { AppShell, type NavGroup } from '@/components/layout/app-shell';
 import { SwitcherPopover } from '@/components/switcher-popover';
@@ -67,8 +67,20 @@ function Logo() {
 
   return (
     <div className={cn('flex items-center gap-2 overflow-hidden', isCollapsed && 'justify-center')}>
-      <CommandIcon className="size-6 shrink-0 text-primary fill-primary/10" />
-      {!isCollapsed && <span className="truncate font-semibold text-foreground">CodeDoan Inc</span>}
+      <Image
+        src="/logo.jpg"
+        alt="Đồ Án 24h Logo"
+        width={28}
+        height={28}
+        className="shrink-0 rounded-sm object-contain"
+        style={{ width: '28px', height: '28px' }}
+        priority
+      />
+      {!isCollapsed && (
+        <span className="truncate text-lg font-black tracking-tight">
+          <span className="text-[#04315B] dark:text-white">ĐỒ ÁN</span> <span className="text-[#FF6A00]">24h</span>
+        </span>
+      )}
     </div>
   );
 }
