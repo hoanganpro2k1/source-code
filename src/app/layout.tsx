@@ -1,11 +1,11 @@
 import { cn } from '@/lib/utils';
 import type { Metadata, Viewport } from 'next';
 import { cookies } from 'next/headers';
-import { Inter } from 'next/font/google';
+import { Geist } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({
-  subsets: ['latin', 'vietnamese'],
+const geist = Geist({
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-inter',
 });
 
@@ -63,8 +63,8 @@ export const viewport: Viewport = {
   ],
 };
 
-import { SiteChrome } from '@/components/layout/SiteChrome';
 import { ThemeProvider } from '@/components/theme-provider';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { AuthProvider } from '@/providers/auth-provider';
 import QueryProvider from '@/providers/query-provider';
 import { Toaster } from 'sonner';
@@ -79,14 +79,16 @@ export default async function RootLayout({
   const accessToken = cookieStore.get('accessToken')?.value;
 
   return (
-    <html lang="vi" suppressHydrationWarning className={cn('h-full', 'antialiased', inter.variable, 'font-sans')}>
+    <html lang="vi" suppressHydrationWarning className={cn('h-full', 'antialiased', geist.variable, 'font-sans')}>
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <QueryProvider>
-            <AuthProvider initialAccessToken={accessToken}>
-              <SiteChrome initialAccessToken={accessToken}>{children}</SiteChrome>
-              <Toaster richColors closeButton duration={2000} position="bottom-right" />
-            </AuthProvider>
+            <TooltipProvider>
+              <AuthProvider initialAccessToken={accessToken}>
+                {children}
+                <Toaster richColors closeButton duration={2000} position="bottom-right" />
+              </AuthProvider>
+            </TooltipProvider>
           </QueryProvider>
         </ThemeProvider>
       </body>
