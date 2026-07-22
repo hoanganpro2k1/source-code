@@ -213,15 +213,15 @@
   }
 
   html:hover {
-    scrollbar-color: var(--border) transparent;
+    scrollbar-color: color-mix(in srgb, var(--primary) 40%, transparent) transparent;
   }
 
   html:hover::-webkit-scrollbar-thumb {
-    background-color: var(--border);
+    background-color: color-mix(in srgb, var(--primary) 40%, transparent);
   }
 
   html::-webkit-scrollbar-thumb:hover {
-    background-color: color-mix(in srgb, var(--border) 70%, var(--foreground));
+    background-color: var(--primary);
   }
 
   ::selection {
@@ -278,14 +278,14 @@
   }
 
   .sidebar-scrollbar:hover {
-    scrollbar-color: var(--sidebar-border) transparent;
+    scrollbar-color: color-mix(in srgb, var(--sidebar-primary) 40%, transparent) transparent;
   }
 
   .sidebar-scrollbar:hover::-webkit-scrollbar-thumb {
-    background-color: var(--sidebar-border);
+    background-color: color-mix(in srgb, var(--sidebar-primary) 40%, transparent);
   }
 
   .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: color-mix(in srgb, var(--sidebar-border) 70%, var(--sidebar-foreground));
+    background-color: var(--sidebar-primary);
   }
 }
