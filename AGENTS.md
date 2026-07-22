@@ -30,11 +30,11 @@ and graduation thesis projects.
 
 Mã nguồn dự án Backend nằm ở thư mục riêng biệt:
 
-- **Đường dẫn Backend**: `D:\SourceDoan\be-source-doan`
+- **Đường dẫn Backend**: `D:\DUAN\DOAN_24H\be-doan-24h`
 - **Địa chỉ Local**: `http://localhost:3001`
-- **Tài liệu ngữ cảnh**: Đọc thêm tại [.agent/context/backend.md](file:///d:/SourceDoan/source-doan/.agent/context/backend.md)
+- **Tài liệu ngữ cảnh**: Đọc thêm tại [.agent/context/backend.md](.agent/context/backend.md)
 
-**QUY TẮC BẮT BUỘC CHO AI**: Khi người dùng yêu cầu làm việc với API hoặc tính năng (ví dụ: login, register, checkout, v.v.), AI phải **chủ động** đọc trực tiếp code của Backend tại `D:\SourceDoan\be-source-doan` thông qua các công cụ hệ thống (`view_file`, `list_dir`, `grep_search`) để biết chính xác cấu trúc API, DTO, Database Schema trước khi viết code Frontend.
+**QUY TẮC BẮT BUỘC CHO AI**: Khi người dùng yêu cầu làm việc với API hoặc tính năng (ví dụ: login, register, checkout, v.v.), AI phải **chủ động** đọc trực tiếp code của Backend tại `D:\DUAN\DOAN_24H\be-doan-24h` thông qua các công cụ hệ thống (`view_file`, `list_dir`, `grep_search`) để biết chính xác cấu trúc API, DTO, Database Schema trước khi viết code Frontend.
 
 ---
 
