@@ -22,12 +22,22 @@ export const useVerifyForm = () => {
   const [resendCountdown, setResendCountdown] = useState(0);
 
   // Đọc sessionStorage 1 lần khi khởi tạo (lazy initializer — không gây cascading render)
-  const [pendingSession] = useState<{ email: string; password: string; callbackUrl?: string | null } | null>(() => {
+  const [pendingSession] = useState<{
+    email: string;
+    password: string;
+    callbackUrl?: string | null;
+    loginContext?: "client" | "admin";
+  } | null>(() => {
     if (typeof window === "undefined") return null; // SSR safety
     try {
       const raw = sessionStorage.getItem(LOGIN_SESSION_KEY);
       if (!raw) return null;
-      const parsed = JSON.parse(raw) as { email: string; password: string; callbackUrl?: string | null };
+      const parsed = JSON.parse(raw) as {
+        email: string;
+        password: string;
+        callbackUrl?: string | null;
+        loginContext?: "client" | "admin";
+      };
       return parsed.email && parsed.password ? parsed : null;
     } catch {
       return null;
@@ -36,13 +46,15 @@ export const useVerifyForm = () => {
 
   const pendingEmail = pendingSession?.email ?? "";
   const pendingPassword = pendingSession?.password ?? "";
+  const loginContext = pendingSession?.loginContext ?? "client";
+  const loginPath = loginContext === "admin" ? "/admin/login" : "/login";
 
   // Effect chỉ dùng để redirect (không setState) — đúng theo React guidelines
   useEffect(() => {
     if (!pendingEmail || !pendingPassword) {
-      router.replace("/login");
+      router.replace(loginPath);
     }
-  }, [pendingEmail, pendingPassword, router]);
+  }, [pendingEmail, pendingPassword, loginPath, router]);
 
   // Che email: h***@gmail.com
   const maskedEmail = pendingEmail
@@ -76,6 +88,7 @@ export const useVerifyForm = () => {
       const payload: LoginBodyType = {
         email: pendingEmail,
         password: pendingPassword,
+        loginContext,
         ...(twoFactorType === "totp" ? { totpCode: code } : { code }),
       };
       return authService.login(payload);
@@ -120,7 +133,7 @@ export const useVerifyForm = () => {
 
   const handleBack = () => {
     sessionStorage.removeItem(LOGIN_SESSION_KEY);
-    router.push("/login");
+    router.push(loginPath);
   };
 
   const handleResendOTP = () => {

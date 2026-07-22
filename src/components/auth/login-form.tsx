@@ -10,9 +10,13 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useLoginForm } from '@/hooks/use-login-form';
 
-export const LoginForm = () => {
+interface LoginFormProps {
+  loginContext?: "client" | "admin";
+}
+
+export const LoginForm = ({ loginContext = "client" }: LoginFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
-  const { form, isLoading, onSubmit, handleGoogleLogin, isGoogleLoading } = useLoginForm();
+  const { form, isLoading, onSubmit, handleGoogleLogin, isGoogleLoading } = useLoginForm(loginContext);
 
   const {
     register,

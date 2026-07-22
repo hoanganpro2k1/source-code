@@ -30,7 +30,10 @@ export const LoginVerifySchema = z
 export type LoginVerifyType = z.infer<typeof LoginVerifySchema>;
 
 // Type gộp để gọi API login (bước 2 gửi đầy đủ email+password+code)
-export type LoginBodyType = LoginStep1Type & LoginVerifyType;
+// loginContext báo cho backend biết form nào đang gọi (client/admin) để
+// chặn đăng nhập sai khu vực (Admin không được vào form client và ngược lại).
+export type LoginBodyType = LoginStep1Type &
+  LoginVerifyType & { loginContext?: "client" | "admin" };
 
 export const SendOTPSchema = z.object({
   email: z.string().email("Email không hợp lệ"),

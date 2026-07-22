@@ -24,10 +24,13 @@ import Image from 'next/image';
 
 import { AppShell, type NavGroup } from '@/components/layout/app-shell';
 import { SwitcherPopover } from '@/components/switcher-popover';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import { SidebarSeparator, useSidebar } from '@/components/ui/sidebar';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { useLogout } from '@/hooks/use-logout';
+import { useProfile } from '@/hooks/use-profile';
 import { cn } from '@/lib/utils';
 
 const NAV_GROUPS: NavGroup[] = [
@@ -85,9 +88,13 @@ function Logo() {
   );
 }
 
-const USER_EMAIL = 'admin@doan24h.vn';
-
-const AccountPopoverContent = () => (
+const AccountPopoverContent = ({
+  onLogout,
+  isLoggingOut,
+}: {
+  onLogout: () => void;
+  isLoggingOut: boolean;
+}) => (
   <div className="space-y-1.5 p-1.5">
     <div className="flex flex-col gap-0.5">
       <Button variant="ghost" size="item" asChild>
@@ -135,9 +142,15 @@ const AccountPopoverContent = () => (
     <div className="mx-1 h-px bg-border" />
 
     <div className="flex flex-col gap-0.5">
-      <Button variant="ghost" size="item" className="text-destructive hover:text-destructive">
+      <Button
+        variant="ghost"
+        size="item"
+        className="text-destructive hover:text-destructive"
+        onClick={onLogout}
+        disabled={isLoggingOut}
+      >
         <LogOut className="size-4" />
-        <span>Đăng xuất</span>
+        <span>{isLoggingOut ? 'Đang đăng xuất...' : 'Đăng xuất'}</span>
       </Button>
     </div>
   </div>
@@ -146,30 +159,43 @@ const AccountPopoverContent = () => (
 function SidebarBottomFooter() {
   const { state, toggleSidebar } = useSidebar();
   const isCollapsed = state === 'collapsed';
+  const { data: profile, isLoading } = useProfile();
+  const { logout, isLoggingOut } = useLogout('/admin/login');
+
+  const displayName = profile?.name || profile?.email || 'Người dùng';
+  const initials = (profile?.name || profile?.email || '??').slice(0, 2).toUpperCase();
 
   return (
     <>
       <div className="p-2">
-        <SwitcherPopover
-          title="Tài khoản"
-          side={isCollapsed ? 'right' : 'top'}
-          align="start"
-          trigger={
-            <div className={cn('flex w-full items-center gap-2', isCollapsed && 'justify-center')}>
-              <Avatar size="sm">
-                <AvatarFallback>{USER_EMAIL.slice(0, 2).toUpperCase()}</AvatarFallback>
-              </Avatar>
-              {!isCollapsed && <span className="truncate text-sm font-medium">{USER_EMAIL}</span>}
-            </div>
-          }
-          className={cn(
-            'border-none bg-transparent shadow-none hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground',
-            isCollapsed ? 'size-9 justify-center p-0' : 'h-11 w-full justify-start px-2',
-          )}
-          contentClassName="w-64"
-        >
-          <AccountPopoverContent />
-        </SwitcherPopover>
+        {isLoading ? (
+          <div className={cn('flex w-full items-center gap-2 px-2 py-2', isCollapsed && 'justify-center')}>
+            <Skeleton className="size-8 shrink-0 rounded-full" />
+            {!isCollapsed && <Skeleton className="h-4 w-24" />}
+          </div>
+        ) : (
+          <SwitcherPopover
+            title="Tài khoản"
+            side={isCollapsed ? 'right' : 'top'}
+            align="start"
+            trigger={
+              <div className={cn('flex w-full items-center gap-2', isCollapsed && 'justify-center')}>
+                <Avatar size="sm">
+                  {profile?.avatar && <AvatarImage src={profile.avatar} alt={displayName} />}
+                  <AvatarFallback>{initials}</AvatarFallback>
+                </Avatar>
+                {!isCollapsed && <span className="truncate text-sm font-medium">{displayName}</span>}
+              </div>
+            }
+            className={cn(
+              'border-none bg-transparent shadow-none hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground',
+              isCollapsed ? 'size-9 justify-center p-0' : 'h-11 w-full justify-start px-2',
+            )}
+            contentClassName="w-64"
+          >
+            <AccountPopoverContent onLogout={logout} isLoggingOut={isLoggingOut} />
+          </SwitcherPopover>
+        )}
       </div>
       <SidebarSeparator className="my-0" />
       <div className="p-2">

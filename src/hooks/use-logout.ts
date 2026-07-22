@@ -5,7 +5,7 @@ import { useAuthStore } from "@/store";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 
-export function useLogout() {
+export function useLogout(redirectTo: string = "/") {
   const router = useRouter();
   const { clearAuth } = useAuthStore();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -19,11 +19,11 @@ export function useLogout() {
       console.error("Lỗi đăng xuất:", err);
     } finally {
       clearAuth();
-      router.push("/");
+      router.push(redirectTo);
       router.refresh();
       setIsLoggingOut(false);
     }
-  }, [isLoggingOut, clearAuth, router]);
+  }, [isLoggingOut, clearAuth, router, redirectTo]);
 
   return { logout, isLoggingOut };
 }

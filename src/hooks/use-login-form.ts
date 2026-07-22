@@ -14,7 +14,7 @@ import { getSafeCallbackUrl } from "@/lib/utils";
 // Key lưu thông tin tạm trong sessionStorage để truyền qua trang verify
 export const LOGIN_SESSION_KEY = "login_pending_2fa";
 
-export const useLoginForm = () => {
+export const useLoginForm = (loginContext: "client" | "admin" = "client") => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const setAuth = useAuthStore((state) => state.setAuth);
@@ -26,7 +26,8 @@ export const useLoginForm = () => {
   });
 
   const mutation = useMutation({
-    mutationFn: (values: LoginStep1Type) => authService.login(values),
+    mutationFn: (values: LoginStep1Type) =>
+      authService.login({ ...values, loginContext }),
     onSuccess: (data: any) => {
       // Backend yêu cầu xác thực 2FA → redirect sang trang verify
       if (data?.requiresTwoFactor) {
@@ -36,9 +37,10 @@ export const useLoginForm = () => {
             email: form.getValues("email"),
             password: form.getValues("password"),
             callbackUrl,
+            loginContext,
           }),
         );
-        router.push("/login/verify");
+        router.push(loginContext === "admin" ? "/admin/login/verify" : "/login/verify");
         return;
       }
 
